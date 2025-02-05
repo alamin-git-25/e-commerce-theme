@@ -6,7 +6,7 @@ export default function BrandsFilter() {
             <h2 className="text-lg font-semibold mb-3 px-4 py-2">Brands</h2>
             <ul className="space-y-2">
                 {brands.map((brand, index) => (
-                    <li key={index} className="flex items-center text-gray-800 dark:text-gray-200 space-x-2 px-4 py-2 border-b last:border-b-0 dark:border-gray-600 hover:bg-black">
+                    <li key={index} className="flex items-center text-gray-800 dark:text-gray-200 space-x-2 px-4 py-2 border-b last:border-b-0 dark:border-gray-600 corse">
                         <input
                             type="checkbox"
                             id={`brand-${index}`}

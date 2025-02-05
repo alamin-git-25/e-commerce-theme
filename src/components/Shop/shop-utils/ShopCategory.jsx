@@ -17,7 +17,7 @@ export default function ShopCategory() {
     ];
     return (
         <div
-            className=" w-full mt-5 shadow-sm overflow-hidden bg-white dark:bg-gray-700  border border-gray-200 dark:border-gray-600 z-50"
+            className=" w-full mt-5 shadow-sm rounded overflow-hidden bg-white dark:bg-gray-700  border border-gray-200 dark:border-gray-600 z-50"
         >
             <h2 className="text-lg font-semibold mb-3 px-4 py-2">Categories</h2>
             <ul className="">

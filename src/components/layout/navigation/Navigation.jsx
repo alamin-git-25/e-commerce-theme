@@ -21,6 +21,14 @@ const categories = [
 ];
 
 const Navigation = () => {
+    const navLinks = [
+        { name: "Home", href: "/" },
+        { name: "Shop", href: "/shop" },
+        { name: "Vendors", href: "/vendors" },
+        { name: "Pages", href: "/pages" },
+        { name: "Blog", href: "/blog" },
+        { name: "Contact", href: "/contact" }
+    ];
     const [isOpen, setIsOpen] = useState(false);
     const [showStickyNav, setShowStickyNav] = useState(false);
     const popupRef = useRef(null);
@@ -80,10 +88,10 @@ const Navigation = () => {
                     </button>
                 </div>
                 <nav className="ml-6 space-x-4 hidden md:flex">
-                    {["Home", "Shop", "Vendors", "Pages", "Blog", "Contact"].map(item => (
-                        <a key={item} href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-700 ">
-                            {item}
-                        </a>
+                    {navLinks.map(item => (
+                        <Link key={item.name} href={item.href} className="text-gray-700 dark:text-gray-300 hover:text-blue-700 ">
+                            {item.name}
+                        </Link>
                     ))}
                 </nav>
                 <div className="flex items-center space-x-4">

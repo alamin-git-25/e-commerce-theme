@@ -24,24 +24,25 @@ export default function CartDrawer() {
                     <>
                         {/* Backdrop */}
                         <motion.div
-                            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
                             onClick={toggleDrawer}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }} // Smooth fade transition
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
                         />
 
-                        {/* Drawer Panel */}
+                        {/* Drawer Panel with Bounce Effect */}
                         <motion.div
-                            className="fixed right-0 top-0 h-full w-96 bg-background shadow-xl z-50 flex flex-col"
+                            className="fixed right-0 top-0 h-full w-96 bg-background shadow-xl z-[999] flex flex-col"
                             initial={{ x: "100%" }}
-                            animate={{ x: 0 }}
-                            exit={{ x: "100%" }}
+                            animate={{ x: [100, -10, 0] }} // Bounce effect
+                            exit={{ x: "100%" }} // Slide out smoothly
                             transition={{
-                                type: "tween",          // Smoother easing
-                                ease: "easeInOut",       // Natural slide effect
-                                duration: 0.5,           // Slightly longer duration for smoothness
+                                type: "spring",
+                                stiffness: 120, // Controls speed
+                                damping: 15, // Controls bounce
+                                duration: 0.5,
                             }}
                         >
                             {/* Header */}
@@ -70,6 +71,8 @@ export default function CartDrawer() {
                     </>
                 )}
             </AnimatePresence>
+
+
         </div>
     );
 }

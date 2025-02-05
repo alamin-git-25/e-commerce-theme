@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 const slides = [
     {
@@ -48,24 +49,16 @@ const Banner = () => {
         );
     };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            handleNext();
-        }, 7000); // Slide every 7 seconds
 
-        return () => clearInterval(interval); // Cleanup interval on component unmount
-    }, []);
 
     return (
         <div
-            className="relative w-full h-[60vh] overflow-hidden"
+            className="relative w-full h-[100vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Slide Content */}
             <AnimatePresence>
                 {slides.map((slide, index) =>
-
                     index === currentIndex ? (
                         <section key={index} className={`${slide.bg} w-full h-full`}>
                             <motion.div
@@ -74,66 +67,72 @@ const Banner = () => {
                                 animate="visible"
                                 exit="exit"
                                 variants={{
-                                    hidden: { opacity: 0, y: 100 },
+                                    hidden: { opacity: 0, y: 10 },
                                     visible: {
                                         opacity: 1,
                                         y: 0,
                                         transition: {
-                                            duration: 1, // Smooth duration for entry
-                                            ease: [0.25, 1, 0.5, 1], // Smooth easing
-                                            staggerChildren: 0.2, // Adds stagger effect
-                                            delayChildren: 0.2, // Delays child animations slightly
+                                            duration: 1,
+                                            ease: [0.25, 1, 0.5, 1],
+                                            staggerChildren: 0.2,
+                                            delayChildren: 0.2,
                                         },
                                     },
                                     exit: {
                                         opacity: 0,
-                                        y: -100,
+                                        y: -10,
                                         transition: {
                                             duration: 1,
                                             ease: [0.25, 1, 0.5, 1],
                                         },
                                     },
                                 }}
-                                className={`absolute inset-0 flex items-center justify-between container mx-auto  bg-cover bg-no-repeat `}
-
+                                className={`absolute inset-0 flex flex-col md:flex-row items-center justify-between container mx-auto bg-cover bg-no-repeat`}
                             >
                                 <motion.div
-                                    className="text-left text-neutral max-w-md space-y-4"
+                                    className="text-left text-neutral max-w-md space-y-4 px-4 sm:px-6 md:px-0"
                                     variants={{
                                         hidden: { opacity: 0, y: 20 },
-                                        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+                                        visible: {
+                                            opacity: 1,
+                                            y: 0,
+                                            transition: { duration: 0.6, ease: "easeOut" },
+                                        },
                                     }}
                                 >
-                                    <motion.p className="text-lg">{slide.subtitle}</motion.p>
-                                    <motion.h2 className="text-4xl font-bold leading-tight my-4">
+                                    <motion.p className="text-base sm:text-lg">{slide.subtitle}</motion.p>
+                                    <motion.h2 className="text-3xl sm:text-4xl font-bold leading-tight my-4">
                                         {slide.title}
                                     </motion.h2>
-                                    <motion.p className="text-xl mb-6">{slide.offer}</motion.p>
+                                    <motion.p className="text-lg sm:text-xl mb-6">{slide.offer}</motion.p>
                                     <motion.button
                                         className="bg-neutral text-primary px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition"
                                     >
                                         {slide.button}
                                     </motion.button>
-
                                 </motion.div>
-                                <motion.div className="w-1/2 flex justify-center"
+                                <motion.div
+                                    className="w-full md:w-1/2 flex justify-center mt-4 md:mt-0"
                                     variants={{
                                         hidden: { opacity: 0, x: 100 },
                                         visible: {
-                                            opacity: 1, x: 0, transition: { duration: 0.9, ease: "easeOut" }
+                                            opacity: 1,
+                                            x: 0,
+                                            transition: { duration: 0.9, ease: "easeOut" },
                                         },
                                     }}
                                 >
-                                    <img
+                                    <Image
+                                        width={500}
+                                        height={500}
                                         src={slide.image}
                                         alt={slide.title}
-                                        className="h-[350px] object-contain"
+                                        className="w-full h-auto max-w-md object-contain"
                                     />
                                 </motion.div>
                             </motion.div>
                         </section>
                     ) : null
-
                 )}
             </AnimatePresence>
 
@@ -172,12 +171,12 @@ const Banner = () => {
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`w-3 h-3 rounded-full ${index === currentIndex ? "bg-white" : "bg-gray-400"
-                            }`}
+                        className={`w-3 h-3 rounded-full ${index === currentIndex ? "bg-white" : "bg-gray-400"}`}
                     />
                 ))}
             </div>
-        </div >
+        </div>
+
     );
 };
 

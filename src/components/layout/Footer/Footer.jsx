@@ -51,7 +51,7 @@ const Footer = () => {
                         placeholder="Enter Your Email"
                         className="px-4 py-2 w-80 rounded-l-lg"
                     />
-                    <button className="bg-black text-white px-4 py-2 rounded-r-lg">
+                    <button className="bg-green-800 text-white px-4 py-2 rounded-r-lg">
                         Subscribe
                     </button>
                 </motion.div>
@@ -72,7 +72,7 @@ const Footer = () => {
                     className="flex flex-col items-center text-center md:items-start md:text-left"
                 >
                     <p className="text-4xl mb-3">LOGO</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-text">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil magnam tempore, incidunt, optio enim omnis sit alias, animi molestias neque placeat ratione quasi! Asperiores atque dolorem aut esse est cumque?
                     </p>
                     {/* Social Media */}
@@ -84,7 +84,7 @@ const Footer = () => {
                                 aria-label={label}
                                 variants={itemVariants}
                                 whileHover={{ scale: 1.2 }}
-                                className="bg-gray-200 p-3 rounded-full hover:bg-blue-500 hover:text-white transition-colors"
+                                className="bg-card p-3 rounded-full hover:bg-blue-500 hover:text-white transition-colors"
                             >
                                 {icon}
                             </motion.a>
@@ -107,7 +107,7 @@ const Footer = () => {
                                 <motion.li
                                     key={i}
                                     variants={itemVariants}
-                                    className="text-sm text-gray-600 mb-2"
+                                    className="text-sm text-text mb-2"
                                 >
                                     <a href={`#${link}`}>{link}</a>
                                 </motion.li>

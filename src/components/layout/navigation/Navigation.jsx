@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, ChevronDown, Phone, X, Sun, Moon, Box, Cpu, Gift, Camera, Utensils, Globe, Headphones, Smartphone, Tv, ChevronRight, LayoutDashboard } from "lucide-react";
+import { Menu, ChevronDown, Phone, X, Sun, Moon, Box, Cpu, Gift, Camera, Utensils, Globe, Headphones, Smartphone, Tv, ChevronRight, LayoutDashboard, MoveRight } from "lucide-react";
 import Container from "@/components/custom/Container";
 import Link from "next/link";
 
@@ -34,9 +34,29 @@ const Navigation = () => {
     const popupRef = useRef(null);
     const buttonRef = useRef(null);
 
+    const [expandedCategory, setExpandedCategory] = useState(null);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        async function fetchCategories() {
+            try {
+                const res = await fetch("/api/category");
+                const data = await res.json();
+                setCategories(data);
+            } catch (error) {
+                console.error("Failed to fetch categories", error);
+            }
+        }
+        fetchCategories();
+    }, []);
+
+    const toggleCategory = (index) => {
+        setExpandedCategory((prev) => (prev === index ? null : index));
+    };
     const handleClickOutside = (event) => {
         if (popupRef.current && !popupRef.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
             setIsOpen(false);
+            setExpandedCategory(null)
         }
     };
 
@@ -68,11 +88,11 @@ const Navigation = () => {
     return (
         <header className="bg-white dark:bg-gray-800 shadow-md z-50">
             <Container className="flex items-center justify-between h-14 relative">
-                <div className="flex items-center w-[25%] justify-between">
+                <div className="flex items-center w-[30%] justify-between">
                     <button
                         ref={buttonRef}
                         onClick={() => setIsOpen(!isOpen)}
-                        className="flex items-center bg-blue-800 text-white justify-between w-full px-4 py-4 hover:bg-blue-900 transition"
+                        className="flex items-center bg-indigo-400 text-white justify-between w-full px-4 py-3 hover:bg-blue-800 transition"
                     >
                         <span className="flex">
                             <LayoutDashboard className="mr-4" />
@@ -80,7 +100,7 @@ const Navigation = () => {
                         </span>
                         <motion.div
                             animate={{ rotate: isOpen ? 180 : 0 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
                             className="ml-2"
                         >
                             <ChevronDown />
@@ -109,26 +129,61 @@ const Navigation = () => {
                     {isOpen && (
                         <motion.div
                             ref={popupRef}
-                            initial={{ opacity: 0, y: 20 }}  // Start 20px above
-                            animate={{ opacity: 1, y: 0 }}   // Move to normal position
-                            exit={{ opacity: 0, y: 20 }}    // Exit back to above
-                            transition={{
-                                duration: 0.3,
-                                ease: "easeOut",  // Smooth easing
-                            }}
-                            className="absolute top-0 left-0 md:w-[25%] overflow-hidden  bg-white dark:bg-gray-700 shadow-lg border border-gray-200 dark:border-gray-600 z-50"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className="absolute top-0 left-0 w-[30%] overflow-hidden bg-white dark:bg-gray-700 shadow-lg border border-gray-200 dark:border-gray-600 z-50"
                         >
-
-                            <ul className="">
+                            <ul>
                                 {categories.map((category, index) => (
                                     <li key={index} className="border-b last:border-b-0 dark:border-gray-600">
-                                        <Link href="#" className="flex items-center justify-between  px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200">
+                                        <button
+                                            onClick={() => toggleCategory(index)}
+                                            className={`flex items-center justify-between w-full px-4 py-4 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 ${expandedCategory === index && 'dark:bg-gray-600 bg-blue-100 '}`}
+                                        >
                                             <span className="flex gap-2">
                                                 {category.icon}
                                                 <span className="ml-2">{category.name}</span>
                                             </span>
-                                            <ChevronRight className="mr-2" />
-                                        </Link>
+                                            <motion.div
+                                                animate={{ rotate: expandedCategory === index ? 90 : 0 }}
+                                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                                className="mr-2"
+                                            >
+                                                <ChevronRight />
+                                            </motion.div>
+                                        </button>
+
+                                        <AnimatePresence>
+                                            {expandedCategory === index && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: "auto" }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    transition={{
+                                                        duration: 0.4,
+                                                        ease: "easeInOut",
+                                                        delay: 0.05
+                                                    }}
+                                                    className="overflow-hidden"
+                                                >
+                                                    <ul className=" py-3 space-y-2">
+                                                        {category.subCategories.map((sub, subIndex) => (
+                                                            <li key={subIndex} className=" px-10 py-2 gap-5 text-gray-600 dark:text-gray-300 border-b last:border-b-0 dark:border-gray-600">
+                                                                <Link href={`/categories/${sub.name}`} className="flex items-center  justify-between">
+                                                                    <span className="flex gap-4">
+                                                                        {sub.icon}
+                                                                        <p>{sub.name}</p>
+                                                                    </span>
+                                                                    <MoveRight />
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </li>
                                 ))}
                             </ul>

@@ -31,8 +31,8 @@ export function SectionHeader({ title, tabs = [], onTabChange, onPrev, onNext })
                             key={tab}
                             onClick={() => handleTabChange(tab)}
                             className={`${activeTab === tab
-                                ? "text-blue-600 font-medium border-b-2 border-blue-600"
-                                : "text-gray-500 hover:text-gray-700"
+                                ? "text-indigo-400 font-medium border-b-2 border-blue-600"
+                                : "text-text"
                                 }`}
                         >
                             {tab}

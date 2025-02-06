@@ -13,6 +13,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { CircleUser, LogIn, MailOpen, UserPlus } from "lucide-react"
+import Link from "next/link"
 import { useState } from "react"
 
 export function Profile() {
@@ -36,14 +37,14 @@ export function Profile() {
 
                 <div className="flex flex-col gap-2 px-2 py-1">
                     <DropdownMenuItem asChild>
-                        <button className="flex items-center gap-3 w-full px-4 py-2 rounded-lg  hover:text-primary-foreground transition">
+                        <Link href='/login' className="flex items-center gap-3 w-full px-4 py-2 rounded-lg  hover:bg-card cursor-pointer text-text">
                             <LogIn className="size-5" />
                             Sign In
-                        </button>
+                        </Link>
                     </DropdownMenuItem>
 
                     <DropdownMenuItem asChild>
-                        <button className="flex items-center gap-3 w-full px-4 py-2 rounded-lg  hover:text-secondary-foreground transition">
+                        <button className="flex items-center gap-3 w-full px-4 py-2 rounded-lg  hover:bg-card">
                             <UserPlus className="size-5" />
                             Sign Up
                         </button>

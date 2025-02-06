@@ -69,7 +69,7 @@ export default function Offer() {
 
             <motion.div className="grid grid-rows-2 gap-3 md:h-[60vh] h-full">
                 <motion.div
-                    className="w-full rounded-xl bg-black"
+                    className="w-full rounded-xl "
                     initial={{ x: 100, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -77,7 +77,7 @@ export default function Offer() {
                     <OfferCard title={products[0].name} description={products[0].description} image={'/p.jpg'} />
                 </motion.div>
                 <motion.div
-                    className="w-full rounded-xl bg-black"
+                    className="w-full rounded-xl "
                     initial={{ x: 100, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.3 }}

@@ -34,7 +34,7 @@ export default function CartDrawer() {
 
                         {/* Drawer Panel with Bounce Effect */}
                         <motion.div
-                            className="fixed right-0 top-0 h-full w-96 bg-background shadow-xl z-[999] flex flex-col"
+                            className="fixed right-0 top-0 h-full md:w-96 w-full bg-background shadow-xl z-[999] flex flex-col"
                             initial={{ x: "100%" }}
                             animate={{ x: [100, -10, 0] }} // Bounce effect
                             exit={{ x: "100%" }} // Slide out smoothly

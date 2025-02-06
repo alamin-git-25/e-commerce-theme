@@ -8,7 +8,9 @@ import Products from './shop-utils/Products'
 import { LayoutGrid, List, SlidersHorizontal } from 'lucide-react'
 import PageBanner from '../custom/PageBanner'
 import MoabilFilter from './shop-utils/MoabilFilter'
-import SearchBar from './Searchbar'
+import SearchBar from './shop-utils/Searchbar'
+import Loader from '../hooks/LoadingAnimation'
+
 
 
 
@@ -25,8 +27,9 @@ export default function Shop() {
             <PageBanner
                 title="Products"
                 breadcrumbs={breadcrumbs}
-                backgroundImage="/p.jpg" // Replace with your actual image path
+                backgroundImage="/p.jpg"
             />
+
             <Container className="my-5">
                 <div className='grid md:grid-cols-4 grid-cols-1 gap-4'>
                     <div className='w-full h-screen md:block hidden'>

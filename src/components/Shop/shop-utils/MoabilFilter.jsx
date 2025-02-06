@@ -4,8 +4,8 @@ import BrandsFilter from './Brands'
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from 'lucide-react';
 import PriceRangeSlider from './Price';
-import SearchBar from '../Searchbar';
 import Container from '@/components/custom/Container';
+import SearchBar from './Searchbar';
 export default function MoabilFilter({ isOpen, toggleMenu }) {
     return (
         <Container className="md:hidden block">
@@ -37,7 +37,7 @@ export default function MoabilFilter({ isOpen, toggleMenu }) {
                         >
 
                             <div className="flex items-center justify-between p-4 border-b">
-                                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-300">Menu</h2>
+                                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-300">Filter</h2>
                                 <button onClick={toggleMenu} className="p-2 rounded-lg hover:bg-gray-300 transition">
                                     <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                                 </button>

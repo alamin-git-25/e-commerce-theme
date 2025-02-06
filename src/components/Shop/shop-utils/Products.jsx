@@ -141,6 +141,8 @@ import { EyeIcon, ShoppingCartIcon } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import Pagination from '@/components/custom/Pagination';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Products({ isGridView, setIsGridView }) {
     const products = [
@@ -219,9 +221,11 @@ export default function Products({ isGridView, setIsGridView }) {
                         <motion.div
                             key={product.id}
                             whileHover={{ scale: 1.01 }}
-                            className={`group p-4 border rounded shadow transition-transform duration-500 ${isGridView ? "h-auto" : "flex items-center space-x-4"}`}
+                            className={`group bg-card p-4 border rounded shadow transition-transform duration-500 ${isGridView ? "h-auto" : "flex items-center space-x-4"}`}
                         >
-                            <img
+                            <Image
+                                width={200}
+                                height={200}
                                 src={product.image}
                                 alt={product.name}
                                 className={`${isGridView ? "w-full h-40 object-cover rounded" : "w-24 h-24 object-cover rounded"}`}
@@ -229,7 +233,7 @@ export default function Products({ isGridView, setIsGridView }) {
 
                             <div className={`${isGridView ? "mt-2" : "ml-4 flex-1"}`}>
                                 <h2 className="text-lg font-semibold">{product.name}</h2>
-                                <p className="text-gray-500">${product.price}</p>
+                                <p className="text-text">${product.price}</p>
                             </div>
 
                             <div className={`opacity-0 mt-5 space-x-4 transition-opacity duration-300 group-hover:opacity-100 ${isGridView ? "flex justify-center" : "ml-auto"}`}>
@@ -237,7 +241,7 @@ export default function Products({ isGridView, setIsGridView }) {
                                     <Tooltip>
                                         <TooltipTrigger asChild>
                                             <Button variant="primary" className="border py-2 px-4 bg-white text-black rounded">
-                                                <EyeIcon />
+                                                <Link href='/details'> <EyeIcon /></Link>
                                             </Button>
                                         </TooltipTrigger>
                                         <TooltipContent>

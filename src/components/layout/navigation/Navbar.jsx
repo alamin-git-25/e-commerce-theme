@@ -82,7 +82,7 @@ const Navbar = () => {
                     )}
                 </motion.div>
             </section>
-            <Container className="lg:hidden">
+            <section className="lg:hidden">
                 <aside className="   w-full bg-background shadow-md z-50">
                     <div className="flex justify-between items-center p-4">
                         {/* Logo */}
@@ -92,7 +92,7 @@ const Navbar = () => {
                             <CartDrawer />
                             <ModeToggle />
                             <button onClick={toggleMenu} className="p-2 rounded-lg hover:bg-gray-200 transition">
-                                <Menu className="w-6 h-6 text-gray-700" />
+                                <Menu className="w-6 h-6 " />
                             </button>
                         </span>
 
@@ -114,7 +114,7 @@ const Navbar = () => {
 
                                 {/* Sidebar Menu */}
                                 <motion.div
-                                    className="fixed left-0 top-0 h-full w-full bg-white dark:bg-gray-800 shadow-lg z-[999] flex flex-col"
+                                    className="fixed left-0 overflow-y-scroll top-0 h-full w-full bg-white dark:bg-gray-800 shadow-lg z-[999] flex flex-col"
                                     initial={{ x: "-100%" }}
                                     animate={{ x: 0 }}
                                     exit={{ x: "-100%" }}
@@ -153,7 +153,7 @@ const Navbar = () => {
                         )}
                     </AnimatePresence>
                 </aside>
-            </Container>
+            </section>
         </header >
     );
 };

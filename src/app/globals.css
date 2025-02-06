@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    /* Base Colors */
+    --background: 204 100% 97.1%; /* Light Gray (#FAFAFA) */
+    --foreground: 220 47% 10%; /* Deep Gray (#1F2937) */
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 220 47% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 47% 10%;
+    --text: 222.2 84% 4.9%;
+    /* Primary Colors */
+    --primary: 0 0% 10%; /* Rich Black (#1A1A1A) */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    /* Secondary Colors */
+    --secondary: 260 85% 60%; /* Royal Purple (#8B5CF6) */
+    --secondary-foreground: 0 0% 100%; /* White */
+
+    /* Accent Colors */
+    --accent: 215 27.9% 16.9%; /* Gold (#FFD700) */
+    --accent-foreground: 0 0% 10%; /* Black */
+
+    /* Muted (Neutrals) */
+    --muted: 220 16% 85%; /* Light Gray (#E5E7EB) */
+    --muted-foreground: 220 10% 50%; /* Gray Text (#6B7280) */
+    --figure: 197 78.9% 14.9%;
+    /* Borders & Inputs */
+    --border: 220 16% 85%;
+    --input: 220 16% 85%;
+    --ring: 260 85% 60%; /* Royal Purple */
+
+    /* Status Colors */
+    --destructive: 0 84% 60%; /* Red (#EF4444) */
+    --destructive-foreground: 0 0% 100%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Mode Adjustments */
+    --background: 222.2 47.4% 11.2%; /* Dark Black (#121212) */
+    --foreground: 0 0% 100%; /* White */
+    --card: 215 27.9% 16.9%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
+    --text: 210 40% 98%;
+    --primary: 0 0% 100%; /* White */
+    --primary-foreground: 0 0% 10%; /* Black */
+    --figure: 187.9 85.7% 53.3%;
+    --secondary: 260 85% 65%; /* Brighter Purple (#9F67FF) */
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 215.4 16.3% 46.9%; /* Bright Gold (#FFD700) */
+    --accent-foreground: 0 0% 10%;
+
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 10% 70%;
+
+    --border: 220 20% 15%;
+    --input: 220 20% 15%;
+    --ring: 260 85% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+.loading {
+  width: 20rem;
+  font-weight: 700;
+}
+.loading text {
+  font-size: 5rem;
+  font-family: "Smooch Sans", serif;
+  stroke-width: 2;
+  letter-spacing: 10px;
+}
+.loading text.text-body {
+  stroke: aliceblue;
+  animation: 4s infinite alternate animate-stoke;
+}
+text.title {
+  font-size: 2rem;
+  stroke-width: 1;
+  letter-spacing: 6px;
+  stroke: aquamarine;
+  fill: aqua;
+  animation: animate-text 4s infinite ease-in-out;
+}
+/* .loadin .text-only {
+  animation: animate-text 4s infinite ease-in-out;
+} */
+
+@keyframes animate-text {
+  0%,
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-stoke {
+  0% {
+    fill: transparent;
+    stroke: aliceblue;
+    stroke-dashoffset: 25%;
+    stroke-width: 3;
+    stroke-dasharray: 0 32%;
+  }
+  50% {
+    fill: transparent;
+    stroke: aliceblue;
+    stroke-width: 3;
+  }
+  80%,
+  100% {
+    fill: aliceblue;
+    stroke: transparent;
+    stroke-width: 0;
+    stroke-dashoffset: -25%;
+    stroke-dasharray: 32% 0;
+  }
+}
+/* Thin Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #714cfe;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+@keyframes rotateCircle {
+  0% {
+    transform: rotate(0deg) translateX(150px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(150px) rotate(-360deg);
+  }
+}
+
+.animate-rotate-circle {
+  animation: rotateCircle 8s linear infinite;
+}

@@ -13,7 +13,7 @@ export default function Service() {
         <Container className="grid lg:grid-cols-4 md:grid-cols-2  gap-2 my-10">
             {
                 supports.map((item, index) => (
-                    <div key={index} className='w-full h-36 rounded-md flex shadow justify-center gap-6 bg-white items-center'>
+                    <div key={index} className='w-full h-36 rounded-md flex shadow justify-center gap-6 bg-card items-center'>
                         <Image src={item.icon} width={50} height={50} alt='' />
                         <span className='flex flex-col justify-center items-center'>
                             <p>{item.title}</p>

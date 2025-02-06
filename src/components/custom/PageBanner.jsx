@@ -5,7 +5,7 @@ import Container from "./Container";
 
 const PageBanner = ({ title, breadcrumbs, backgroundImage }) => {
     return (
-        <div className="w-full bg-gray-100 py-16 px-4 md:px-20 relative overflow-hidden">
+        <div className="w-full bg-gray-100 dark:bg-gray-900 py-16 px-4 md:px-20 relative overflow-hidden">
             {/* Background Image */}
             <Container>
                 <div
@@ -17,8 +17,8 @@ const PageBanner = ({ title, breadcrumbs, backgroundImage }) => {
 
                 {/* Title & Breadcrumbs */}
                 <div className="relative z-10">
-                    <h1 className="text-3xl font-bold text-black">{title}</h1>
-                    <nav className="mt-2 text-gray-500 text-sm flex items-center space-x-2">
+                    <h1 className="text-3xl font-bold text-text">{title}</h1>
+                    <nav className="mt-2 text-text text-sm flex items-center space-x-2">
                         {breadcrumbs.map((item, index) => (
                             <span key={index} className="flex items-center">
                                 {index > 0 && <span className="mx-1 text-gray-400">•</span>}
@@ -27,7 +27,7 @@ const PageBanner = ({ title, breadcrumbs, backgroundImage }) => {
                                         {item.label}
                                     </Link>
                                 ) : (
-                                    <span className="font-medium text-black">{item.label}</span>
+                                    <span className="font-medium text-text">{item.label}</span>
                                 )}
                             </span>
                         ))}

@@ -4,6 +4,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Button } from '@/components/ui/button';
 import { EyeIcon, ShoppingCartIcon } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 export default function ProductCard({ product }) {
     const cardVariants = {
         hidden: { y: 50, opacity: 0 },
@@ -21,7 +22,7 @@ export default function ProductCard({ product }) {
         <motion.div
             key={product.id}
             variants={cardVariants}
-            className="group relative w-68 h-[480px] bg-primary-foreground border rounded-xl overflow-hidden"
+            className="group relative w-68 h-[480px] bg-card border rounded-xl overflow-hidden"
         >
             <div className="relative w-full flex justify-center items-center pt-5 z-10">
                 <Image
@@ -42,7 +43,7 @@ export default function ProductCard({ product }) {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Button variant="primary" className="relative border py-2 px-8 bg-white text-black font-bold uppercase tracking-wider rounded">
-                                    <EyeIcon />
+                                    <Link href='/details'> <EyeIcon /></Link>
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>

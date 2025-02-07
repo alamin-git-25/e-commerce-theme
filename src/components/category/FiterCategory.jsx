@@ -1,21 +1,18 @@
 "use client"
-import React, { useMemo, useState } from 'react'
-import Container from '../custom/Container'
-import ShopCategory from './shop-utils/ShopCategory'
-import BrandsFilter from './shop-utils/Brands'
-import PriceRangeFilter from './shop-utils/Price'
-import Products from './shop-utils/Products'
-import { LayoutGrid, List, SlidersHorizontal } from 'lucide-react'
-import PageBanner from '../custom/PageBanner'
-import MoabilFilter from './shop-utils/MoabilFilter'
-import SearchBar from './shop-utils/Searchbar'
-import { useGetAllProductsQuery } from '@/redux/api/productApi'
 
+import { useMemo, useState } from "react";
+import PageBanner from "../custom/PageBanner";
+import Container from "../custom/Container";
+import SearchBar from "../Shop/shop-utils/Searchbar";
+import ShopCategory from "../Shop/shop-utils/ShopCategory";
+import BrandsFilter from "../Shop/shop-utils/Brands";
+import PriceRangeSlider from "../Shop/shop-utils/Price";
+import { LayoutGrid, List, SlidersHorizontal } from "lucide-react";
+import Products from "../Shop/shop-utils/Products";
+import MoabilFilter from "../Shop/shop-utils/MoabilFilter";
+import { useGetAllProductsQuery } from "@/redux/api/productApi";
 
-
-
-
-export default function Shop() {
+export default function Category({ category }) {
     const [isGridView, setIsGridView] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -32,12 +29,14 @@ export default function Shop() {
         { refetchOnFocus: true, refetchOnMountOrArgChange: true }
     );
 
-    const products = useMemo(() => data?.data || [], [data]);
+    const products = useMemo(() => data?.data?.filter((item) => item?.subCategory === category) || [], [data]);
+    console.log(products);
+
     const totalPages = data?.totalPages || 1;
     return (
         <section>
             <PageBanner
-                title="Products"
+                title={category}
                 breadcrumbs={breadcrumbs}
                 backgroundImage="/p.jpg"
             />
@@ -48,7 +47,7 @@ export default function Shop() {
                         <SearchBar />
                         <ShopCategory />
                         <BrandsFilter />
-                        <PriceRangeFilter />
+                        <PriceRangeSlider />
                     </div>
                     <div className='w-full h-screen col-span-3'>
                         <div className="flex h-12 justify-start items-center mb-4 space-x-2 md:ml-0 ml-3">

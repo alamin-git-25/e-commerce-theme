@@ -30,8 +30,8 @@ export default function Category() {
     };
 
     return (
-        <Container>
-            <div className="flex items-center justify-between">
+        <section className="px-0 md:container">
+            <div className="flex items-center justify-between w-full">
                 <button
                     ref={buttonRef}
                     onClick={() => setIsOpen(!isOpen)}
@@ -113,6 +113,6 @@ export default function Category() {
                     )}
                 </AnimatePresence>
             </div>
-        </Container>
+        </section>
     );
 }

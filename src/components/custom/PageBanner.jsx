@@ -2,18 +2,16 @@
 import React from "react";
 import Link from "next/link";
 import Container from "./Container";
+import Image from "next/image";
 
 const PageBanner = ({ title, breadcrumbs, backgroundImage }) => {
     return (
-        <div className="w-full bg-gray-100 dark:bg-gray-900 py-16 px-4 md:px-20 relative overflow-hidden">
+        <div className="bg-gray-200 dark:bg-gray-600 py-5">
             {/* Background Image */}
-            <Container>
-                <div
-                    className="absolute top-0 right-0 h-full w-1/3 bg-no-repeat bg-contain bg-right"
-                    style={{
-                        backgroundImage: `url(${backgroundImage})`,
-                    }}
-                ></div>
+            <Container className="relative  h-[20vh] w-full flex justify-between items-center">
+
+
+
 
                 {/* Title & Breadcrumbs */}
                 <div className="relative z-10">
@@ -33,6 +31,7 @@ const PageBanner = ({ title, breadcrumbs, backgroundImage }) => {
                         ))}
                     </nav>
                 </div>
+                <Image src="/icons/shoppingCard.png" width={250} height={250} alt="" />
             </Container>
         </div>
     );

@@ -6,19 +6,7 @@ import { Menu, ChevronDown, Phone, X, Sun, Moon, Box, Cpu, Gift, Camera, Utensil
 import Container from "@/components/custom/Container";
 import Link from "next/link";
 
-const categories = [
-    { name: "New Arrivals", icon: <Box className="w-5 h-5" /> },
-    { name: "Electronics", icon: <Cpu className="w-5 h-5" /> },
-    { name: "Gifts", icon: <Gift className="w-5 h-5" /> },
-    { name: "Computers", icon: <Cpu className="w-5 h-5" /> },
-    { name: "Smartphones & Tablets", icon: <Smartphone className="w-5 h-5" /> },
-    { name: "TV, Video & Music", icon: <Tv className="w-5 h-5" /> },
-    { name: "Cameras", icon: <Camera className="w-5 h-5" /> },
-    { name: "Cooking", icon: <Utensils className="w-5 h-5" /> },
-    { name: "Accessories", icon: <Box className="w-5 h-5" /> },
-    { name: "Sports", icon: <Globe className="w-5 h-5" /> },
-    { name: "Electronic Gadgets", icon: <Headphones className="w-5 h-5" /> }
-];
+
 
 const Navigation = () => {
     const navLinks = [
@@ -137,54 +125,63 @@ const Navigation = () => {
                         >
                             <ul>
                                 {categories.map((category, index) => (
-                                    <li key={index} className="border-b last:border-b-0 dark:border-gray-600">
-                                        <button
-                                            onClick={() => toggleCategory(index)}
-                                            className={`flex items-center justify-between w-full px-4 py-4 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 ${expandedCategory === index && 'dark:bg-gray-600 bg-blue-100 '}`}
-                                        >
-                                            <span className="flex gap-2">
-                                                {category.icon}
-                                                <span className="ml-2">{category.name}</span>
-                                            </span>
-                                            <motion.div
-                                                animate={{ rotate: expandedCategory === index ? 90 : 0 }}
-                                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                                className="mr-2"
-                                            >
-                                                <ChevronRight />
-                                            </motion.div>
-                                        </button>
-
-                                        <AnimatePresence>
-                                            {expandedCategory === index && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, height: 0 }}
-                                                    animate={{ opacity: 1, height: "auto" }}
-                                                    exit={{ opacity: 0, height: 0 }}
-                                                    transition={{
-                                                        duration: 0.4,
-                                                        ease: "easeInOut",
-                                                        delay: 0.05
-                                                    }}
-                                                    className="overflow-hidden"
+                                    <span key={index} >
+                                        {
+                                            category.subCategories ? <li className="border-b  dark:border-gray-600">
+                                                <button
+                                                    onClick={() => toggleCategory(index)}
+                                                    className={`flex items-center justify-between w-full px-4 py-4 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 ${expandedCategory === index && 'dark:bg-gray-600 bg-blue-100 '}`}
                                                 >
-                                                    <ul className=" py-3 space-y-2">
-                                                        {category.subCategories.map((sub, subIndex) => (
-                                                            <li key={subIndex} className=" px-10 py-2 gap-5 text-gray-600 dark:text-gray-300 border-b last:border-b-0 dark:border-gray-600">
-                                                                <Link href={`/categories/${sub.name}`} className="flex items-center  justify-between">
-                                                                    <span className="flex gap-4">
-                                                                        {sub.icon}
-                                                                        <p>{sub.name}</p>
-                                                                    </span>
-                                                                    <MoveRight />
-                                                                </Link>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </li>
+                                                    <span className="flex gap-2">
+                                                        {category.icon}
+                                                        <span className="ml-2">{category.name}</span>
+                                                    </span>
+                                                    <motion.div
+                                                        animate={{ rotate: expandedCategory === index ? 90 : 0 }}
+                                                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                                                        className="mr-2"
+                                                    >
+                                                        <ChevronRight />
+                                                    </motion.div>
+                                                </button>
+
+                                                <AnimatePresence>
+                                                    {expandedCategory === index && (
+                                                        <motion.div
+                                                            initial={{ opacity: 0, height: 0 }}
+                                                            animate={{ opacity: 1, height: "auto" }}
+                                                            exit={{ opacity: 0, height: 0 }}
+                                                            transition={{
+                                                                duration: 0.4,
+                                                                ease: "easeInOut",
+                                                                delay: 0.05
+                                                            }}
+                                                            className="overflow-hidden"
+                                                        >
+                                                            <ul className=" py-3 space-y-2">
+                                                                {category?.subCategories?.map((sub, subIndex) => (
+                                                                    <li key={subIndex} className=" px-10 py-2 gap-5 text-gray-600 dark:text-gray-300 border-b last:border-b-0 dark:border-gray-600">
+                                                                        <Link href={`/categories/${sub.name}`} className="flex items-center  justify-between">
+                                                                            <span className="flex gap-4">
+                                                                                {sub.icon}
+                                                                                <p>{sub.name}</p>
+                                                                            </span>
+                                                                            <MoveRight />
+                                                                        </Link>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </li> : <Link href={`/categories/${category.name}`} className="flex items-center justify-between w-full px-4 py-3 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 border-b  dark:border-gray-600 cursor-pointer">
+                                                <span className="flex gap-2">
+                                                    {category.icon}
+                                                    <span className="ml-2">{category.name}</span>
+                                                </span>
+                                            </Link>
+                                        }
+                                    </span>
                                 ))}
                             </ul>
                         </motion.div>

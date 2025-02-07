@@ -59,7 +59,7 @@ export default function Offer() {
 
     return (
         <Container className="grid gap-3 my-10 grid-cols-1 md:grid-cols-3">
-            <div className="col-span-1 md:col-span-2 md:h-[60vh] h-full relative rounded-xl w-full">
+            <div className="col-span-1 md:col-span-2 md:h-[60vh] h-full  relative rounded-xl w-full">
                 {products.map((product, index) => (
                     index === currentIndex && (
                         <OfferBanner key={index} product={product} />

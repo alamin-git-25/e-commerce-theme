@@ -45,7 +45,7 @@ const Navbar = () => {
                 <Container>
                     <nav className="flex justify-between items-center h-20">
                         {/* Logo */}
-                        <span className="text-primary text-xl font-bold">Logo</span>
+                        <span className="text-indigo-600 text-4xl  font-bold">Lorem</span>
 
                         <SearchBar />
                         <div className="flex items-center space-x-8">
@@ -65,7 +65,7 @@ const Navbar = () => {
                 >
                     {showStickyNav && (
                         <Container className="flex justify-between items-center h-20">
-                            <span className="text-primary text-xl ">Logo</span>
+                            <span className="text-indigo-600 text-4xl ">Lorem</span>
                             <nav className="space-x-4">
                                 {navLinks.map(item => (
                                     <Link key={item.name} href={item.href} className="text-gray-700 dark:text-gray-300 hover:text-blue-700 ">
@@ -86,7 +86,7 @@ const Navbar = () => {
                 <aside className="   w-full bg-background shadow-md z-50">
                     <div className="flex justify-between items-center p-4">
                         {/* Logo */}
-                        <span className="text-primary text-xl font-bold">Logo</span>
+                        <span className="text-primary text-xl font-bold">Lorem</span>
 
                         <span className="flex justify-center items-center gap-3">
                             <CartDrawer />

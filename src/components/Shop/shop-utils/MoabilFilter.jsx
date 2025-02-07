@@ -8,7 +8,7 @@ import Container from '@/components/custom/Container';
 import SearchBar from './Searchbar';
 export default function MoabilFilter({ isOpen, toggleMenu }) {
     return (
-        <Container className="md:hidden block">
+        <Container className="md:hidden block px-0">
             <AnimatePresence>
                 {isOpen && (
                     <>

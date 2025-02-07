@@ -30,7 +30,7 @@ const Footer = () => {
         <footer className="mt-36">
             {/* Newsletter Section */}
             <motion.div
-                className="bg-blue-600 mt-10 text-white p-8 py-20 text-center relative"
+                className="bg-gray-200 dark:bg-gray-700 mt-10 text-text p-8 py-20 h-80 text-center relative"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.2 }}

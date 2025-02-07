@@ -5,7 +5,11 @@ import { Button } from '@/components/ui/button';
 import { EyeIcon, ShoppingCartIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-export default function ProductCard({ product }) {
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/redux/cartSlice';
+export default function ProductCard({ product, handleAddToCart }) {
+    console.log(product);
+
     const cardVariants = {
         hidden: { y: 50, opacity: 0 },
         visible: {
@@ -18,9 +22,10 @@ export default function ProductCard({ product }) {
             },
         },
     };
+
     return (
         <motion.div
-            key={product.id}
+            key={product?.product_id}
             variants={cardVariants}
             className="group relative w-68 h-[480px] bg-card border rounded-xl overflow-hidden"
         >
@@ -28,16 +33,16 @@ export default function ProductCard({ product }) {
                 <Image
                     width={200}
                     height={200}
-                    src={product.image}
-                    alt={product.name}
+                    src={product?.images[0]}
+                    alt={product?.name}
                     className="h-[300px] w-auto transition-transform duration-500 group-hover:scale-90"
                 />
             </div>
             <div className="relative p-5 flex flex-col items-center text-center z-20">
                 <h3 className="text-lg text-primary font-medium uppercase tracking-wider">
-                    {product.name.substring(0, 20)}
+                    {product?.name}
                 </h3>
-                <h2 className="text-xl text-primary  tracking-wide">$ {product.price}</h2>
+                <h2 className="text-xl text-primary  tracking-wide">$ {product?.price}</h2>
                 <div className="opacity-0 space-x-4 mt-5 translate-y-5 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
                     <TooltipProvider>
                         <Tooltip>
@@ -55,7 +60,7 @@ export default function ProductCard({ product }) {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Button title="Add To Cart" variant="primary" className="relative border py-2 px-8 bg-white text-black font-bold uppercase tracking-wider rounded">
+                                <Button onClick={() => handleAddToCart(product)} title="Add To Cart" variant="primary" className="relative border py-2 px-8 bg-white text-black font-bold uppercase tracking-wider rounded">
                                     <ShoppingCartIcon />
                                 </Button>
                             </TooltipTrigger>

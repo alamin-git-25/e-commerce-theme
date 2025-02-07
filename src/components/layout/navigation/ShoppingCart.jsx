@@ -109,11 +109,11 @@ export default function CartDrawer() {
                                                 />
 
                                                 <div>
-                                                    <h3 className="text-xl text-text text-nowrap">{item?.name}</h3>
+                                                    <h3 className="text-xl text-text text-nowrap">{item?.name?.slice(0, 6)}</h3>
 
                                                     <dl className="mt-0.5 space-y-1 text-sm text-text">
 
-                                                        <span className="flex justify-between">
+                                                        <span className="flex justify-start items-center my-3">
                                                             <button onClick={() => handleMinus(item.productId, item.quantity)} className="size-7 bg-card text-text rounded">-</button><span className="size-7 text-center">{item.quantity}</span><button onClick={() => handlePlus(item.productId, item.quantity)} className="size-7 bg-card text-text rounded">+</button>
                                                         </span>
                                                         <div>
@@ -143,7 +143,7 @@ export default function CartDrawer() {
                                                 <div className="flex flex-1 items-center justify-end gap-2">
 
 
-                                                    <button onClick={() => dispatch(removeCart())} className="text-gray-600 pr-2 transition hover:text-red-600">
+                                                    <button onClick={() => dispatch(removeCart({ productId: item.productId }))} className="text-gray-600 pr-2 transition hover:text-red-600">
                                                         <span className="sr-only">Remove item</span>
 
                                                         <Trash />

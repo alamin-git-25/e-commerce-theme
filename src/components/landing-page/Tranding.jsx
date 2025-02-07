@@ -1,23 +1,42 @@
 "use client";
-import React from "react";
+import React, { useMemo, useState } from "react";
 import Container from "../custom/Container";
 import { SectionHeader } from "../custom/Heading";
 import { motion } from "framer-motion";
 import Offer from "./Offer";
 import ProductCard from "../custom/card/ProductCard";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/cartSlice";
+import { useGetAllProductsQuery } from "@/redux/api/productApi";
+import LoadingSpinner from "../hooks/Spinner";
 
 export default function Tranding() {
-    const products = [
-        { id: 1, name: "Wireless Bluetooth Headphones", price: 59.99, category: "Featured", image: "/p.jpg", rating: 4.5 },
-        { id: 2, name: "Smartwatch Series 6", price: 249.99, category: "Trending", image: "/p.jpg", rating: 4.7 },
-        { id: 3, name: "4K Ultra HD Smart TV", price: 799.99, category: "Top rated", image: "/p.jpg", rating: 4.9 },
-        { id: 4, name: "Portable Bluetooth Speaker", price: 29.99, category: "On sale", image: "/p.jpg", rating: 4.3 },
-        { id: 5, name: "Gaming Laptop", price: 1299.99, category: "Featured", image: "/p.jpg", rating: 4.8 },
-        { id: 6, name: "Noise Cancelling Earbuds", price: 99.99, category: "On sale", image: "/p.jpg", rating: 4.6 },
-        { id: 7, name: "Digital SLR Camera", price: 499.99, category: "Trending", image: "/p.jpg", rating: 4.4 },
-        { id: 8, name: "Smart Home Assistant", price: 89.99, category: "Top rated", image: "/p.jpg", rating: 4.7 },
-    ];
+    const [page, setPage] = useState(1);
+    const limit = 12;
 
+    // Fetch product data
+    const { data, isLoading, isFetching } = useGetAllProductsQuery(
+        { page, limit },
+        { refetchOnFocus: true, refetchOnMountOrArgChange: true }
+    );
+
+    const products = useMemo(() => data?.data || [], [data]);
+
+
+    const totalPages = data?.totalPages || 1;
+    const dispatch = useDispatch();
+    const handleAddToCart = (product) => {
+
+        dispatch(addToCart({
+            productId: product?.product_id,
+            quantity: 1,
+            color: "#fff",
+            size: 'Cv',
+            name: product?.name,
+            image: product?.images?.[0],
+            price: product?.price,
+        }));
+    };
     const tabs = ["All", "Featured", "On sale", "Trending", "Top rated"];
 
     const handleTabChange = (tab) => {
@@ -34,8 +53,6 @@ export default function Tranding() {
         },
     };
 
-
-
     return (
         <Container>
             <SectionHeader title="Trending Products" tabs={tabs} onTabChange={handleTabChange} />
@@ -46,8 +63,10 @@ export default function Tranding() {
                 whileInView="visible"
 
             >
+                {isLoading && <LoadingSpinner />}
                 {products.map((product, idx) => (
-                    <ProductCard key={idx} product={product} />
+
+                    <ProductCard handleAddToCart={handleAddToCart} key={idx} product={product} />
                 ))}
             </motion.section>
             <Offer />

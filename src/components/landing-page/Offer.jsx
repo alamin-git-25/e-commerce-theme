@@ -59,12 +59,16 @@ export default function Offer() {
 
     return (
         <Container className="grid gap-3 my-10 grid-cols-1 md:grid-cols-3">
+
             <div className="col-span-1 md:col-span-2 md:h-[60vh] h-full  relative rounded-xl w-full">
-                {products.map((product, index) => (
-                    index === currentIndex && (
-                        <OfferBanner key={index} product={product} />
-                    )
-                ))}
+                <motion.div
+                    className="w-full h-full rounded-xl "
+                    initial={{ x: -100, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                >
+                    <OfferBanner title={products[0].name} price={products[0].price} description={products[0].description} image={'/p.jpg'} />
+                </motion.div>
             </div>
 
             <motion.div className="grid grid-rows-2 gap-3 md:h-[60vh] h-full">
@@ -74,7 +78,7 @@ export default function Offer() {
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    <OfferCard title={products[0].name} description={products[0].description} image={'/p.jpg'} />
+                    <OfferCard title={products[0].name} price={products[0].price} description={products[0].description} image={'/p.jpg'} />
                 </motion.div>
                 <motion.div
                     className="w-full rounded-xl "
@@ -82,7 +86,7 @@ export default function Offer() {
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
                 >
-                    <OfferCard title={products[0].name} description={products[0].description} image={'/p.jpg'} />
+                    <OfferCard title={products[1].name} price={products[1].price} description={products[1].description} image={'/p.jpg'} />
                 </motion.div>
             </motion.div>
         </Container>

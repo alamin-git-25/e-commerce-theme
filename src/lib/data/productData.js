@@ -22,11 +22,11 @@ export const products = [
     },
     {
         product_id: 6, colors: ["#000000", "#FFFFFF", "#008000"],
-        images: ["/p.jpg", "/3.png", "/4.png", "/2.png"], name: "Desktop PC", price: 999.99, category: "Computers", subCategory: "Desktops", description: "High-performance desktop for work and gaming.", stock: 8, rating: 4.7
+        images: ["/p.jpg", "/3.png", "/4.png", "/2.png"], name: "Desktop PC", price: 999.99, category: "Computers", subCategory: "Laptops", description: "High-performance desktop for work and gaming.", stock: 8, rating: 4.7
     },
     {
         product_id: 7, colors: ["#000000", "#FFFFFF", "#008000"],
-        images: ["/p.jpg", "/3.png", "/4.png", "/2.png"], name: "4K Monitor", price: 399.99, category: "Computers", subCategory: "Monitors", description: "Ultra HD monitor for immersive viewing experience.", stock: 15, rating: 4.6
+        images: ["/p.jpg", "/3.png", "/4.png", "/2.png"], name: "4K Monitor", price: 399.99, category: "Computers", subCategory: "Laptops", description: "Ultra HD monitor for immersive viewing experience.", stock: 15, rating: 4.6
     },
     {
         product_id: 8, colors: ["#000000", "#FFFFFF", "#008000"],

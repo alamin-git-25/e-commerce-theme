@@ -11,14 +11,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, LayoutDashboard, Menu, X } from "lucide-react";
 import Category from "./Category";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
     const navLinks = [
         { name: "Home", href: "/" },
         { name: "Shop", href: "/shop" },
-        { name: "Vendors", href: "/vendors" },
-        { name: "Pages", href: "/pages" },
-        { name: "Blog", href: "/blog" },
         { name: "Contact", href: "/contact" }
     ];
 
@@ -38,7 +36,7 @@ const Navbar = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
-
+    const pathName = usePathname();
     return (
         <header className="">
             <section className="z-50 md:block hidden bg-background border-b border-border shadow-sm">
@@ -67,11 +65,12 @@ const Navbar = () => {
                         <Container className="flex justify-between items-center h-20">
                             <span className="text-indigo-600 text-4xl ">Lorem</span>
                             <nav className="space-x-4">
-                                {navLinks.map(item => (
-                                    <Link key={item.name} href={item.href} className="text-gray-700 dark:text-gray-300 hover:text-blue-700 ">
+                                {navLinks.map(item => {
+                                    const isActive = pathName === item.href || pathName.startsWith(item.href) && item.href !== '/'
+                                    return <Link key={item.name} href={item.href} className={`text-gray-700  pb-1 text-xl dark:text-gray-300 hover:text-blue-700 ${isActive && 'border-b-2 border-gray-600'}`}>
                                         {item.name}
                                     </Link>
-                                ))}
+                                })}
                             </nav>
                             <div className="flex items-center space-x-8">
                                 <Profile />
@@ -84,11 +83,11 @@ const Navbar = () => {
             </section>
             <section className="lg:hidden">
                 <aside className="   w-full bg-background shadow-md z-50">
-                    <div className="flex justify-between items-center p-4">
+                    <div className="flex fixed top-0 w-full bg-white dark:bg-gray-900 left-0 justify-between items-center p-4 z-[999]">
                         {/* Logo */}
                         <span className="text-primary text-xl font-bold">Lorem</span>
 
-                        <span className="flex justify-center items-center gap-3">
+                        <span className="flex justify-center items-center gap-6">
                             <CartDrawer />
                             <ModeToggle />
                             <button onClick={toggleMenu} className="p-2 rounded-lg hover:bg-gray-200 transition">
@@ -132,7 +131,7 @@ const Navbar = () => {
                                             <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                                         </button>
                                     </div>
-                                    <Category />
+                                    <Category toggleMenu={toggleMenu} />
                                     {/* Menu Items */}
                                     <nav className="flex flex-col p-4 space-y-4">
                                         {navLinks.map((item, indx) => (

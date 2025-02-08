@@ -5,6 +5,8 @@ import Container from "../custom/Container";
 import { InputField } from "../custom/InputFiled";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 
 export default function Checkout() {
@@ -14,13 +16,24 @@ export default function Checkout() {
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        // Simulate payment processing...
+        setTimeout(() => {
+            setLoading(false);
+            toast.success("Order Pleced!");
+        }, 2000);
+        router.push('/payment-getway')
+    };
     return (
         <Container className="mt-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Billing & Shipping Info Section */}
                 <section className="bg-card shadow-lg rounded-lg p-6 space-y-4">
                     <h3 className="text-2xl font-semibold ">Billing & Shipping Information</h3>
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleSubmit}>
                         <InputField
                             id="full-name"
                             label="Full Name"

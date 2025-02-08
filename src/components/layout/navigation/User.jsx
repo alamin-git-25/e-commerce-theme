@@ -37,17 +37,19 @@ export function Profile() {
 
                 <div className="flex flex-col gap-2 px-2 py-1">
                     <DropdownMenuItem asChild>
-                        <Link href='/login' className="flex items-center gap-3 w-full px-4 py-2 rounded-lg  hover:bg-card cursor-pointer text-text">
+
+                        <Link href='/login' className="flex items-center gap-3 w-full px-4 py-2 rounded-lg  hover:bg-gray-400 cursor-pointer text-text">
                             <LogIn className="size-5" />
                             Sign In
                         </Link>
+
                     </DropdownMenuItem>
 
                     <DropdownMenuItem asChild>
-                        <button className="flex items-center gap-3 w-full px-4 py-2 rounded-lg  hover:bg-card">
+                        <Link href='/signup' className="flex items-center gap-3 w-full px-4 py-2 rounded-lg  hover:bg-gray-400 cursor-pointer text-text">
                             <UserPlus className="size-5" />
                             Sign Up
-                        </button>
+                        </Link>
                     </DropdownMenuItem>
                 </div>
             </DropdownMenuContent>

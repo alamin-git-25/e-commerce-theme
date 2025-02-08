@@ -5,10 +5,8 @@ import { Button } from '@/components/ui/button';
 import { EyeIcon, ShoppingCartIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '@/redux/cartSlice';
 export default function ProductCard({ product, handleAddToCart }) {
-    console.log(product);
+
 
     const cardVariants = {
         hidden: { y: 50, opacity: 0 },
@@ -27,28 +25,28 @@ export default function ProductCard({ product, handleAddToCart }) {
         <motion.div
             key={product?.product_id}
             variants={cardVariants}
-            className="group relative w-68 h-[480px] bg-card border rounded-xl overflow-hidden"
+            className="group relative  w-full md:h-[550px] h-[300px] bg-card border rounded overflow-hidden"
         >
-            <div className="relative w-full flex justify-center items-center pt-5 z-10">
+            <div className="relative w-full flex justify-center items-center md:pt-5 z-10">
                 <Image
                     width={200}
                     height={200}
                     src={product?.images[0]}
                     alt={product?.name}
-                    className="h-[300px] w-auto transition-transform duration-500 group-hover:scale-90"
+                    className="md:h-[350px] h-auto w-auto transition-transform duration-500 group-hover:scale-90"
                 />
             </div>
             <div className="relative p-5 flex flex-col items-center text-center z-20">
-                <h3 className="text-lg text-primary font-medium uppercase tracking-wider">
+                <h3 className="md:text-lg text-sm text-primary font-medium uppercase tracking-wider line-clamp-1">
                     {product?.name}
                 </h3>
-                <h2 className="text-xl text-primary  tracking-wide">$ {product?.price}</h2>
-                <div className="opacity-0 space-x-4 mt-5 translate-y-5 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                <h2 className="md:text-xl text-sm text-primary  tracking-wide">$ {product?.price}</h2>
+                <div className="md:block hidden opacity-0 space-x-4 mt-5 translate-y-5 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Button variant="primary" className="relative border py-2 px-8 bg-white text-black font-bold uppercase tracking-wider rounded">
-                                    <Link href='/details'> <EyeIcon /></Link>
+                                    <Link href={`/details/${product.product_id}`}> <EyeIcon /></Link>
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
@@ -70,7 +68,9 @@ export default function ProductCard({ product, handleAddToCart }) {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
+                <button className='py-1 rounded my-4 text-text px-4 bg-green-400 border md:hidden'>Add To Cart</button>
             </div>
         </motion.div>
+
     )
 }

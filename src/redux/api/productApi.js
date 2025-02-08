@@ -13,11 +13,18 @@ const productApi = baseApi.injectEndpoints({
                 url: `/products/${id}`
             }),
             providesTags: ['products']
-        })
+        }),
+        getEveryProducts: builder.query({
+            query: () => ({
+                url: '/products/allProducts'
+            }),
+            providesTags: ['products']
+        }),
     }),
 });
 
 export const {
     useGetAllProductsQuery,
-    useGetProductQuery
+    useGetProductQuery,
+    useGetEveryProductsQuery
 } = productApi;

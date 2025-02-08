@@ -3,11 +3,11 @@ export async function GET() {
         {
             name: "New Arrivals",
             icon: "📦",
-            subCategories: [
-                { name: "Trending", icon: "🔥" },
-                { name: "Best Sellers", icon: "🏆" },
-                { name: "Just Launched", icon: "🚀" },
-            ],
+            // subCategories: [
+            //     { name: "Trending", icon: "🔥" },
+            //     { name: "Best Sellers", icon: "🏆" },
+            //     { name: "Just Launched", icon: "🚀" },
+            // ],
         },
         {
             name: "Electronics",

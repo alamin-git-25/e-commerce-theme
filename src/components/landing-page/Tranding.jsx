@@ -9,12 +9,12 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
 import { useGetAllProductsQuery } from "@/redux/api/productApi";
 import LoadingSpinner from "../hooks/Spinner";
+import { toast } from "react-toastify";
 
 export default function Tranding() {
     const [page, setPage] = useState(1);
     const limit = 12;
 
-    // Fetch product data
     const { data, isLoading, isFetching } = useGetAllProductsQuery(
         { page, limit },
         { refetchOnFocus: true, refetchOnMountOrArgChange: true }
@@ -36,6 +36,7 @@ export default function Tranding() {
             image: product?.images?.[0],
             price: product?.price,
         }));
+        toast.success(`${product?.name}  added to cart!`);
     };
     const tabs = ["All", "Featured", "On sale", "Trending", "Top rated"];
 
@@ -57,7 +58,7 @@ export default function Tranding() {
         <Container>
             <SectionHeader title="Trending Products" tabs={tabs} onTabChange={handleTabChange} />
             <motion.section
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                className="grid grid-cols-2 lg:grid-cols-4 md:gap-2 gap-1"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -73,3 +74,5 @@ export default function Tranding() {
         </Container>
     );
 }
+
+

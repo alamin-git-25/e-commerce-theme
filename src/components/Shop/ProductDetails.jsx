@@ -12,6 +12,7 @@ import { useParams } from "next/navigation";
 import LoadingSpinner from "../hooks/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
+import { toast } from "react-toastify";
 
 export default function ProductDetails() {
     const params = useParams();
@@ -42,11 +43,11 @@ export default function ProductDetails() {
 
     const handleAddToCart = () => {
         if (!product) return; // ✅ Prevent errors if product is not loaded
-
         dispatch(addToCart({
-            productId: product?.id, // Ensure product ID is correct
+            productId: product?.id,
             quantity: quantity
         }));
+        toast.success(`${product.name} added in Cart`)
     };
 
     return (
@@ -175,7 +176,7 @@ export default function ProductDetails() {
 
             {/* Related Products and Reviews */}
             <div className="mt-10">
-                <RelatedProducts category={product?.subCategory} />
+                <RelatedProducts category={product?.subCategory} id={product.product_id} />
                 <ReviewForm />
             </div>
         </Container>

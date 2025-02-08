@@ -83,7 +83,7 @@ export default function Products({ isGridView, products = [], totalPages, limit,
                     <AnimatePresence mode="wait">
                         <motion.section
                             key={page}
-                            className={`grid ${isGridView ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" : "grid-cols-1 gap-4"}`}
+                            className={`grid ${isGridView ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" : "grid-cols-1 gap-4"}`}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
@@ -154,39 +154,12 @@ export default function Products({ isGridView, products = [], totalPages, limit,
                                     </div>
 
                                     {/* Quick Actions */}
-                                    <div
-                                        className={`opacity-0 flex justify-end items-end mt-5 space-x-4 transition-opacity duration-300 group-hover:opacity-100 ${isGridView ? "flex justify-center" : "ml-auto"
-                                            }`}
-                                    >
-                                        {/* Quick View Button */}
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Button variant="primary" className="border py-2 px-4 bg-white text-black rounded">
-                                                        <Link href={`/details/${product.product_id}`}>
-                                                            <EyeIcon />
-                                                        </Link>
-                                                    </Button>
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    <p>Quick View</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
 
-                                        {/* Add to Cart Button */}
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Button onClick={() => handleAddToCart(product)} variant="primary" className="border py-2 px-4 bg-white text-black rounded">
-                                                        <ShoppingCartIcon />
-                                                    </Button>
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    <p>Add to Cart</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
+                                    <div className="flex justify-between gap-2">
+                                        <button className="px-2 py-2  border w-full bg-gray-400 rounded text-white text-nowrap"><Link href={`/details/${product.product_id}`}>
+                                            View Product
+                                        </Link></button>
+                                        <button className="px-2 py-2  border w-full bg-gray-700 rounded text-white text-nowrap" onClick={() => handleAddToCart(product)}>Add To Cart</button>
                                     </div>
                                 </motion.div>
                             ))}

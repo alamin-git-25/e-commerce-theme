@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, ChevronDown, Phone, X, Sun, Moon, Box, Cpu, Gift, Camera, Utensils, Globe, Headphones, Smartphone, Tv, ChevronRight, LayoutDashboard, MoveRight } from "lucide-react";
 import Container from "@/components/custom/Container";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 
 
@@ -12,9 +13,6 @@ const Navigation = () => {
     const navLinks = [
         { name: "Home", href: "/" },
         { name: "Shop", href: "/shop" },
-        { name: "Vendors", href: "/vendors" },
-        { name: "Pages", href: "/pages" },
-        { name: "Blog", href: "/blog" },
         { name: "Contact", href: "/contact" }
     ];
     const [isOpen, setIsOpen] = useState(false);
@@ -73,6 +71,7 @@ const Navigation = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [isOpen]);
+    const pathName = usePathname()
     return (
         <header className="bg-white dark:bg-gray-800 shadow-md z-50">
             <Container className="flex items-center justify-between h-14 relative">
@@ -95,12 +94,13 @@ const Navigation = () => {
                         </motion.div>
                     </button>
                 </div>
-                <nav className="ml-6 space-x-4 hidden md:flex">
-                    {navLinks.map(item => (
-                        <Link key={item.name} href={item.href} className="text-gray-700 dark:text-gray-300 hover:text-blue-700 ">
+                <nav className="ml-6 space-x-6 hidden md:flex">
+                    {navLinks.map(item => {
+                        const isActive = pathName === item.href || pathName.startsWith(item.href) && item.href !== '/'
+                        return <Link key={item.name} href={item.href} className={`text-gray-700  pb-1 text-xl dark:text-gray-300 hover:text-blue-700 ${isActive && 'border-b-2 border-gray-600'}`}>
                             {item.name}
                         </Link>
-                    ))}
+                    })}
                 </nav>
                 <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2">
@@ -161,7 +161,7 @@ const Navigation = () => {
                                                             <ul className=" py-3 space-y-2">
                                                                 {category?.subCategories?.map((sub, subIndex) => (
                                                                     <li key={subIndex} className=" px-10 py-2 gap-5 text-gray-600 dark:text-gray-300 border-b last:border-b-0 dark:border-gray-600">
-                                                                        <Link href={`/categories/${sub.name}`} className="flex items-center  justify-between">
+                                                                        <Link href={`/categories/${sub.name}`} onClick={() => setIsOpen(false)} className="flex items-center  justify-between">
                                                                             <span className="flex gap-4">
                                                                                 {sub.icon}
                                                                                 <p>{sub.name}</p>
@@ -174,7 +174,7 @@ const Navigation = () => {
                                                         </motion.div>
                                                     )}
                                                 </AnimatePresence>
-                                            </li> : <Link href={`/categories/${category.name}`} className="flex items-center justify-between w-full px-4 py-3 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 border-b  dark:border-gray-600 cursor-pointer">
+                                            </li> : <Link href={`/categories/${category.name}`} onClick={() => setIsOpen(false)} className="flex items-center justify-between w-full px-4 py-3 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 border-b  dark:border-gray-600 cursor-pointer">
                                                 <span className="flex gap-2">
                                                     {category.icon}
                                                     <span className="ml-2">{category.name}</span>
@@ -193,3 +193,5 @@ const Navigation = () => {
 };
 
 export default Navigation;
+
+

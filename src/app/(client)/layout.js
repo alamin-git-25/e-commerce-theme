@@ -3,6 +3,7 @@ import "../globals.css";
 import Navbar from "@/components/layout/navigation/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import ReduxProvider from "@/redux/Provider";
+import ToastProvider from "@/components/hooks/ToastProvider";
 
 
 
@@ -35,7 +36,7 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             <Navbar />
-
+            <ToastProvider />
             {children}
 
           </ThemeProvider>

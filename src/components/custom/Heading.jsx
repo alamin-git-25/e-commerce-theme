@@ -14,10 +14,10 @@ export function SectionHeader({ title, tabs = [], onTabChange, onPrev, onNext })
     };
 
     return (
-        <div className="flex flex-col lg:flex-row items-center justify-between my-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between my-5 md:my-16">
             <div className="flex flex-col mb-4 lg:mb-0">
                 <div className="flex items-center space-x-4">
-                    <h2 className="text-xl sm:text-4xl font-semibold">
+                    <h2 className="text-2xl sm:text-5xl font-semibold">
                         <span className="text-blue-600">{title.split(" ")[0]}</span>{" "}
                         {title.split(" ").slice(1).join(" ")}
                     </h2>
@@ -60,4 +60,5 @@ export function SectionHeader({ title, tabs = [], onTabChange, onPrev, onNext })
 
     );
 }
+
 

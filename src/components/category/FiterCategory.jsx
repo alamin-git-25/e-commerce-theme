@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PageBanner from "../custom/PageBanner";
 import Container from "../custom/Container";
 import SearchBar from "../Shop/shop-utils/Searchbar";
@@ -21,7 +21,7 @@ export default function Category({ category }) {
         { label: "Products" }
     ];
     const [page, setPage] = useState(1);
-    const limit = 12;
+    const [limit, setLimit] = useState(0);
 
     // Fetch product data
     const { data, isLoading, isFetching } = useGetAllProductsQuery(
@@ -88,3 +88,5 @@ export default function Category({ category }) {
         </section>
     )
 }
+
+

@@ -101,7 +101,7 @@ export const OfferCard = ({ title, description, price, image }) => {
                 >
                     EXCLUSIVE
                 </motion.span>
-                <h1 className="text-2xl font-bold text-text mt-2">{title}</h1>
+                <h1 className="text-xl line-clamp-2 text-text mt-2">{title}</h1>
                 <p className="text-text text-sm mt-2 line-clamp-3">{description}</p>
 
                 <motion.div

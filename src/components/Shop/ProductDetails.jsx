@@ -70,8 +70,9 @@ export default function ProductDetails() {
                 </div>
 
                 {/* Selected Image */}
-                <div className="h-[70vh] bg-card border rounded-lg md:col-span-5 flex items-center justify-center">
+                <div className="h-[70vh] bg-card overflow-hidden border rounded-lg md:col-span-5 flex items-center justify-center">
                     <motion.div
+                        className="overflow-hidden"
                         key={selectedImage}
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -79,12 +80,12 @@ export default function ProductDetails() {
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                     >
                         <Image
-                            width={500}
-                            height={500}
+                            width={1920}
+                            height={1080}
                             src={selectedImage || '/p.jpg'}
                             alt={product?.name}
                             priority
-                            className="w-full h-auto md:h-full object-contain p-4"
+                            className="w-full h-full overflow-hidden md:h-full object-contain p-4"
                         />
                     </motion.div>
                 </div>
@@ -167,8 +168,9 @@ export default function ProductDetails() {
                                 <Plus />
                             </button>
                         </div>
-                        <button onClick={handleAddToCart} className="px-5 py-2 md:mt-0 bg-[#DB4444] rounded text-white">
+                        <button onClick={handleAddToCart} className="px-5 py-2 md:mt-0 bg-green-500 rounded text-white">
                             Add To Cart
+
                         </button>
                     </div>
                 </div>

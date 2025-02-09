@@ -9,7 +9,7 @@ import { LayoutGrid, List, SlidersHorizontal } from 'lucide-react'
 import PageBanner from '../custom/PageBanner'
 import MoabilFilter from './shop-utils/MoabilFilter'
 import SearchBar from './shop-utils/Searchbar'
-import { useGetAllProductsQuery } from '@/redux/api/productApi'
+import { useGetAllProductsQuery, useGetEveryProductsQuery } from '@/redux/api/productApi'
 
 
 
@@ -23,17 +23,10 @@ export default function Shop() {
         { label: "Home", href: "/" },
         { label: "Products" }
     ];
-    const [page, setPage] = useState(1);
-    const limit = 12;
-
-    // Fetch product data
-    const { data, isLoading, isFetching } = useGetAllProductsQuery(
-        { page, limit },
-        { refetchOnFocus: true, refetchOnMountOrArgChange: true }
-    );
-
-    const products = useMemo(() => data?.data || [], [data]);
-    const totalPages = data?.totalPages || 1;
+    const { data: products, isLoading, isFetching } = useGetEveryProductsQuery(undefined, {
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    })
     return (
         <section>
             <PageBanner
@@ -74,12 +67,8 @@ export default function Shop() {
                         </div>
                         <Products
                             products={products}
-                            totalPages={totalPages}
-                            limit={limit}
-                            page={page}
                             isLoading={isLoading}
                             isFetching={isFetching}
-                            setPage={setPage}
                             isGridView={isGridView}
                             setIsGridView={setIsGridView} />
                     </div>

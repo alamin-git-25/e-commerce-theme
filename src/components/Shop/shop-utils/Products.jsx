@@ -1,5 +1,4 @@
 "use client";
-
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/custom/Container";
 import { EyeIcon, ShoppingCartIcon } from "lucide-react";
@@ -13,31 +12,22 @@ import NotFound from "@/components/hooks/NotFound";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useSearchParams } from "next/navigation";
 
-export default function Products({ isGridView, products = [], totalPages, limit, page, setPage, isLoading }) {
-    const [selectedOptions, setSelectedOptions] = useState({});
+export default function Products({ isGridView, products, isLoading }) {
+    const [num, setNum] = useState(1);
+    const searchParams = useSearchParams();
+    const page = Number(searchParams.get('page')) || num;
+    const per_page = Number(searchParams.get('per_page')) || 12;
 
-    // Set default color & size when products change
-    useEffect(() => {
-        if (products.length > 0) {
-            const defaultSelections = products.reduce((acc, product) => {
-                acc[product.product_id] = {
-                    color: product.colors?.[0] || null, // First color as default
-                    size: product.sizes?.[0] || null,   // First size as default
-                };
-                return acc;
-            }, {});
-            setSelectedOptions(defaultSelections);
-        }
-    }, [products]);
 
-    // Handle color & size selection
-    const handleSelect = (productId, type, value) => {
-        setSelectedOptions((prev) => ({
-            ...prev,
-            [productId]: { ...prev[productId], [type]: value },
-        }));
-    };
+
+    const start = (page - 1) * per_page;
+    const end = start + per_page;
+    const alls = Array.isArray(products) ? products.slice(start, end) : [];
+
+
 
     // Motion Variants
     const containerVariants = {
@@ -58,27 +48,24 @@ export default function Products({ isGridView, products = [], totalPages, limit,
     // Redux
     const dispatch = useDispatch();
     const handleAddToCart = (product) => {
-        if (!selectedOptions[product.product_id]) return;
-        const { color, size } = selectedOptions[product.product_id];
-
         dispatch(addToCart({
             productId: product?.product_id,
             quantity: 1,
-            color,
-            size,
+            color: '#eee',
+            size: '0',
             name: product?.name,
             image: product?.images?.[0] || "/placeholder.jpg",
             price: product?.price,
         }));
+        toast.success(`${product?.name} added in Cart`)
     };
 
     return (
-        <Container className="mt-5 pb-10">
+        <Container className="mt-5 pb-10 overflow-hidden">
             {/* Loading Spinner */}
             {isLoading && <LoadingSpinner />}
 
-            {/* Product Grid */}
-            {products.length > 0 ? (
+            {alls?.length > 0 ? (
                 <section>
                     <AnimatePresence mode="wait">
                         <motion.section
@@ -89,30 +76,29 @@ export default function Products({ isGridView, products = [], totalPages, limit,
                             exit="exit"
                             variants={containerVariants}
                         >
-                            {products.map((product) => (
+                            {alls?.map((product) => (
                                 <motion.div
                                     key={product.product_id}
                                     whileHover={{ scale: 1.01 }}
-                                    className={`group bg-card p-4 border rounded shadow transition-transform duration-500 ${isGridView ? "h-auto" : "flex items-center space-x-4"
-                                        }`}
+                                    className={`group bg-card p-2 border rounded shadow transition-transform duration-500 relative ${isGridView ? "h-auto" : "flex items-center space-x-4"}`}
                                 >
                                     {/* Product Image */}
                                     <Image
-                                        width={200}
-                                        height={200}
+                                        width={500}
+                                        height={500}
                                         src={product?.images?.[0] || "/placeholder.jpg"}
                                         alt={product.name}
-                                        className={`${isGridView ? "w-full h-44 object-cover rounded" : "w-24 h-24 object-cover rounded"}`}
+                                        className={`${isGridView ? "w-full h-auto object-contain rounded" : "w-44 h-44 object-cover rounded"}`}
                                     />
 
                                     {/* Product Details */}
-                                    <div className={`${isGridView ? "mt-2" : "ml-4 flex-1"}`}>
-                                        <h2 className="text-lg font-semibold">{product.name}</h2>
+                                    <div className={`${isGridView ? "mt-2 pb-16" : "ml-4 flex-1 pb-16"}`}>
+                                        <h2 className="text-lg font-semibold line-clamp-2">{product.name}</h2>
                                         <div>{renderStars(product.rating)}</div>
                                         <p className="text-text">${product.price.toFixed(2)}</p>
 
                                         {/* Color Options */}
-                                        {product?.colors?.length > 0 && (
+                                        {/* {product?.colors?.length > 0 && (
                                             <div className="my-4 flex items-center gap-3">
                                                 <h3 className="font-semibold">Color:</h3>
                                                 <div className="flex space-x-2">
@@ -129,7 +115,7 @@ export default function Products({ isGridView, products = [], totalPages, limit,
                                                     ))}
                                                 </div>
                                             </div>
-                                        )}
+                                        )} */}
 
                                         {/* Size Options */}
                                         {product?.sizes?.length > 0 && (
@@ -153,29 +139,37 @@ export default function Products({ isGridView, products = [], totalPages, limit,
                                         )}
                                     </div>
 
-                                    {/* Quick Actions */}
-
-                                    <div className="flex justify-between gap-2">
-                                        <button className="px-2 py-2  border w-full bg-gray-400 rounded text-white text-nowrap"><Link href={`/details/${product.product_id}`}>
-                                            View Product
-                                        </Link></button>
-                                        <button className="px-2 py-2  border w-full bg-gray-700 rounded text-white text-nowrap" onClick={() => handleAddToCart(product)}>Add To Cart</button>
+                                    {/* Fixed Bottom Buttons */}
+                                    <div className={`${isGridView && 'absolute bottom-0 left-0 right-0 border-t'}  bg-white p-2 flex justify-between gap-2 `}>
+                                        <button className="px-2 py-2 border w-full bg-gray-400 rounded text-white text-nowrap">
+                                            <Link href={`/details/${product.product_id}`}>
+                                                View Product
+                                            </Link>
+                                        </button>
+                                        <button
+                                            className="px-2 py-2 border w-full bg-gray-700 rounded text-white text-nowrap"
+                                            onClick={() => handleAddToCart(product)}
+                                        >
+                                            Add To Cart
+                                        </button>
                                     </div>
                                 </motion.div>
+
                             ))}
                         </motion.section>
                     </AnimatePresence>
 
-                    {/* Pagination */}
                     {products && (
                         <div className="flex justify-center mt-4">
-                            <Pagination setPage={setPage} page={page} totalPages={totalPages} />
+                            <Pagination setPage={setNum} page={num} totalPages={products?.length} per_page={per_page} />
+
                         </div>
                     )}
                 </section>
             ) : (
                 <NotFound />
-            )}
-        </Container>
+            )
+            }
+        </Container >
     );
 }

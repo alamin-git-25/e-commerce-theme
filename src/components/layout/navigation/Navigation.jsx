@@ -2,10 +2,11 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, ChevronDown, Phone, X, Sun, Moon, Box, Cpu, Gift, Camera, Utensils, Globe, Headphones, Smartphone, Tv, ChevronRight, LayoutDashboard, MoveRight } from "lucide-react";
+import { Menu, ChevronDown, Phone, ChevronRight, LayoutDashboard, MoveRight } from "lucide-react";
 import Container from "@/components/custom/Container";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 
 
@@ -79,7 +80,7 @@ const Navigation = () => {
                     <button
                         ref={buttonRef}
                         onClick={() => setIsOpen(!isOpen)}
-                        className="flex items-center bg-indigo-400 text-white justify-between w-full px-4 py-3 hover:bg-blue-800 transition"
+                        className="flex items-center bg-blue-800 text-white justify-between w-full px-4 py-3 hover:bg-blue-900 transition"
                     >
                         <span className="flex">
                             <LayoutDashboard className="mr-4" />
@@ -97,8 +98,8 @@ const Navigation = () => {
                 <nav className="ml-6 space-x-6 hidden md:flex">
                     {navLinks.map(item => {
                         const isActive = pathName === item.href || pathName.startsWith(item.href) && item.href !== '/'
-                        return <Link key={item.name} href={item.href} className={`text-gray-700  pb-1 text-xl dark:text-gray-300 hover:text-blue-700 ${isActive && 'border-b-2 border-gray-600'}`}>
-                            {item.name}
+                        return <Link key={item.name} href={item.href} className={`text-gray-700  pb-1 text-xl dark:text-gray-300 hover:text-blue-700 ${isActive && 'border-b-2  border-gray-600'}`}>
+                            <span className="uppercase nav">{item.name}</span>
                         </Link>
                     })}
                 </nav>
@@ -106,7 +107,7 @@ const Navigation = () => {
                     <div className="flex items-center space-x-2">
                         <Phone className="text-blue-700" />
                         <span className="text-gray-800 dark:text-gray-200">
-                            Hotline: <strong className="text-black dark:text-white">8 800 332 65-66</strong>
+                            Hotline: <strong className="text-black dark:text-white">8 800 12 35 89</strong>
                         </span>
                     </div>
                 </div>
@@ -133,7 +134,7 @@ const Navigation = () => {
                                                     className={`flex items-center justify-between w-full px-4 py-4 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 ${expandedCategory === index && 'dark:bg-gray-600 bg-blue-100 '}`}
                                                 >
                                                     <span className="flex gap-2">
-                                                        {category.icon}
+                                                        <Image src={category?.icon} width={30} height={30} alt={category?.name} />
                                                         <span className="ml-2">{category.name}</span>
                                                     </span>
                                                     <motion.div
@@ -163,8 +164,8 @@ const Navigation = () => {
                                                                     <li key={subIndex} className=" px-10 py-2 gap-5 text-gray-600 dark:text-gray-300 border-b last:border-b-0 dark:border-gray-600">
                                                                         <Link href={`/categories/${sub.name}`} onClick={() => setIsOpen(false)} className="flex items-center  justify-between">
                                                                             <span className="flex gap-4">
-                                                                                {sub.icon}
-                                                                                <p>{sub.name}</p>
+                                                                                <Image src={sub?.icon} width={30} height={30} alt={sub?.name} />
+                                                                                <p>{sub?.name}</p>
                                                                             </span>
                                                                             <MoveRight />
                                                                         </Link>
@@ -176,8 +177,9 @@ const Navigation = () => {
                                                 </AnimatePresence>
                                             </li> : <Link href={`/categories/${category.name}`} onClick={() => setIsOpen(false)} className="flex items-center justify-between w-full px-4 py-3 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 border-b  dark:border-gray-600 cursor-pointer">
                                                 <span className="flex gap-2">
-                                                    {category.icon}
-                                                    <span className="ml-2">{category.name}</span>
+
+                                                    <Image src={category?.icon} width={30} height={30} alt={category?.name} />
+                                                    <span className="ml-2">{category?.name}</span>
                                                 </span>
                                             </Link>
                                         }

@@ -14,6 +14,8 @@ import { addToCart } from "@/redux/cartSlice";
 import { toast } from "react-toastify";
 
 export function RelatedProducts({ category, id }) {
+    console.log(category);
+
     const { data, isLoading, isFetching } = useGetAllProductsQuery({ page: 1, limit: 12 }, {
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true

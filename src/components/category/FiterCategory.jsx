@@ -10,7 +10,7 @@ import PriceRangeSlider from "../Shop/shop-utils/Price";
 import { LayoutGrid, List, SlidersHorizontal } from "lucide-react";
 import Products from "../Shop/shop-utils/Products";
 import MoabilFilter from "../Shop/shop-utils/MoabilFilter";
-import { useGetAllProductsQuery } from "@/redux/api/productApi";
+import { useGetAllProductsQuery, useGetEveryProductsQuery } from "@/redux/api/productApi";
 
 export default function Category({ category }) {
     const [isGridView, setIsGridView] = useState(true);
@@ -20,19 +20,16 @@ export default function Category({ category }) {
         { label: "Home", href: "/" },
         { label: "Products" }
     ];
-    const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(0);
 
-    // Fetch product data
-    const { data, isLoading, isFetching } = useGetAllProductsQuery(
-        { page, limit },
-        { refetchOnFocus: true, refetchOnMountOrArgChange: true }
-    );
+    const { data, isLoading, isFetching } = useGetEveryProductsQuery(undefined, {
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    })
 
-    const products = useMemo(() => data?.data?.filter((item) => item?.subCategory === category) || [], [data]);
+
+    const products = useMemo(() => data?.filter((item) => item?.subCategory === category) || [], [data]);
     console.log(products);
 
-    const totalPages = data?.totalPages || 1;
     return (
         <section>
             <PageBanner
@@ -73,12 +70,8 @@ export default function Category({ category }) {
                         </div>
                         <Products
                             products={products}
-                            totalPages={totalPages}
-                            limit={limit}
-                            page={page}
                             isLoading={isLoading}
                             isFetching={isFetching}
-                            setPage={setPage}
                             isGridView={isGridView}
                             setIsGridView={setIsGridView} />
                     </div>
@@ -88,5 +81,6 @@ export default function Category({ category }) {
         </section>
     )
 }
+
 
 

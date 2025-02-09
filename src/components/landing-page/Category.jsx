@@ -6,6 +6,7 @@ import Container from "../custom/Container";
 import { SectionHeader } from "../custom/Heading";
 import Link from "next/link";
 import { useGetCategoriesQuery } from "@/redux/api/categoryApi";
+import Image from "next/image";
 
 export function Category() {
     const { data: categories, isLoading } = useGetCategoriesQuery(undefined, {
@@ -35,7 +36,9 @@ export function Category() {
                                         <Link className="flex flex-col items-center justify-center md:w-40 w-20 md:h-40 h-20 bg-card shadow-md rounded-full p-4 md:min-w-40 min-w-20"
                                             href={`/categories/${item?.name}`}
                                         >
-                                            <div className="text-4xl mb-2">{item?.icon}</div>
+                                            <div className="text-4xl mb-2">
+                                                <Image src={item?.icon} width={60} height={60} alt={item?.name} />
+                                            </div>
                                             <h3 className="text-sm font-semibold text-center md:block hidden">{item?.name}</h3>
                                         </Link>
                                     </motion.div>

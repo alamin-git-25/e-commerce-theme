@@ -8,32 +8,70 @@ import Image from "next/image";
 const slides = [
     {
         id: 1,
-        image: "/2.png", // Replace with your image paths
-        title: "The best tablet Collection 2023",
-        subtitle: "Starting at $274.00",
-        offer: "Exclusive offer -35% off this week",
+        image: "/banner/banner200.png",
+        title: "UltraFast Laptop - Power Meets Portability",
+        subtitle: "Starting at $1,299.00",
+        offer: "Limited Deal - Save $200",
         button: "Shop Now",
-        bg: 'bg-gradient-to-br from-teal-900 to-violet-600'
     },
     {
         id: 2,
-        image: "/3.png",
-        title: "Smart Watches on Sale",
-        subtitle: "Starting at $199.00",
-        offer: "Exclusive offer -25% off this week",
-        button: "Discover More",
-        bg: 'bg-gradient-to-br from-orange-800 to-cyan-700'
+        image: "/banner/banner700.png",
+        title: "Capture Every Moment - 4K Camera",
+        subtitle: "Starting at $799.00",
+        offer: "Holiday Sale - 15% Off",
+        button: "Shop Now",
     },
     {
         id: 3,
-        image: "/4.png",
-        title: "Explore Latest Wearables",
-        subtitle: "Starting at $150.00",
-        offer: "Exclusive offer -20% off this week",
-        button: "Check Deals",
-        bg: 'bg-gradient-to-br from-slate-700 to-indigo-400'
+        image: "/banner/banner100.png",
+        title: "High-Tech Drone - Aerial Photography Redefined",
+        subtitle: "Starting at $1,499.00",
+        offer: "Special Launch Offer - 12% Off",
+        button: "Shop Now",
+    },
+    {
+        id: 4,
+        image: "/banner/banner300.png",
+        title: "Smartwatch Pro - Fitness & Connectivity",
+        subtitle: "Starting at $299.00",
+        offer: "Exclusive - Free Strap Included",
+        button: "Shop Now",
+    },
+    {
+        id: 5,
+        image: "/banner/banner400.png",
+        title: "Next-Gen Graphics Card - Ultimate Performance",
+        subtitle: "Starting at $699.00",
+        offer: "Gaming Week - 10% Off",
+        button: "Shop Now",
+    },
+    {
+        id: 6,
+        image: "/banner/banner800.png",
+        title: "Wireless Headphones - Pure Sound, No Wires",
+        subtitle: "Starting at $199.00",
+        offer: "Flash Sale - 20% Off",
+        button: "Shop Now",
+    },
+    {
+        id: 7,
+        image: "/banner/banner500.png",
+        title: "4K Ultra HD Monitor - Crystal Clear Display",
+        subtitle: "Starting at $499.00",
+        offer: "Cyber Deals - Save $100",
+        button: "Shop Now",
+    },
+    {
+        id: 8,
+        image: "/banner/banner600.png",
+        title: "Pro Gaming Joystick - Ultimate Control",
+        subtitle: "Starting at $149.00",
+        offer: "Gamer’s Choice - 15% Off",
+        button: "Shop Now",
     },
 ];
+
 
 const Banner = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,7 +98,7 @@ const Banner = () => {
             <AnimatePresence>
                 {slides.map((slide, index) =>
                     index === currentIndex ? (
-                        <section key={index} className={`${slide.bg} w-full h-full`}>
+                        <section key={index} className={`bg-gradient-to-br from-slate-700 to-indigo-400 w-full h-full`}>
                             <motion.div
                                 key={slide.id}
                                 initial="hidden"
@@ -123,11 +161,11 @@ const Banner = () => {
                                     }}
                                 >
                                     <Image
-                                        width={500}
-                                        height={500}
+                                        width={1920}
+                                        height={1080}
                                         src={slide.image}
                                         alt={slide.title}
-                                        className="w-full h-auto max-w-md object-contain"
+                                        className="md:w-[500px] w-full h-auto  object-contain"
                                     />
                                 </motion.div>
                             </motion.div>

@@ -6,6 +6,7 @@ import Container from "@/components/custom/Container";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useGetCategoriesQuery } from "@/redux/api/categoryApi";
+import Image from "next/image";
 
 export default function Category({ toggleMenu }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +66,8 @@ export default function Category({ toggleMenu }) {
                                                     className={`flex items-center justify-between w-full px-4 py-4 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 ${expandedCategory === index && 'dark:bg-gray-600 bg-blue-100 '}`}
                                                 >
                                                     <span className="flex gap-2">
-                                                        {category.icon}
+
+                                                        <Image src={category?.icon} width={30} height={30} alt={category?.name} />
                                                         <span className="ml-2">{category.name}</span>
                                                     </span>
                                                     <motion.div
@@ -95,7 +97,10 @@ export default function Category({ toggleMenu }) {
                                                                     <li key={subIndex} className=" px-10 py-2 gap-5 text-gray-600 dark:text-gray-300 border-b last:border-b-0 dark:border-gray-600">
                                                                         <Link href={`/categories/${sub.name}`} onClick={toggleMenu} className="flex items-center  justify-between">
                                                                             <span className="flex gap-4">
-                                                                                {sub.icon}
+
+
+                                                                                <Image src={sub?.icon} width={30} height={30} alt={sub?.name} />
+
                                                                                 <p>{sub.name}</p>
                                                                             </span>
                                                                             <MoveRight />
@@ -108,8 +113,8 @@ export default function Category({ toggleMenu }) {
                                                 </AnimatePresence>
                                             </li> : <Link href={`/categories/${category.name}`} onClick={toggleMenu} className="flex items-center justify-between w-full px-4 py-3 hover:bg-blue-100 dark:hover:bg-gray-600 rounded text-gray-800 dark:text-gray-200 border-b  dark:border-gray-600 cursor-pointer">
                                                 <span className="flex gap-2">
-                                                    {category.icon}
-                                                    <span className="ml-2">{category.name}</span>
+                                                    <Image src={category?.icon} width={30} height={30} alt={category?.name} />
+                                                    <span className="ml-2">{category?.name}</span>
                                                 </span>
                                             </Link>
                                         }

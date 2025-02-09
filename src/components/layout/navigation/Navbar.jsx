@@ -43,7 +43,7 @@ const Navbar = () => {
                 <Container>
                     <nav className="flex justify-between items-center h-20">
                         {/* Logo */}
-                        <span className="text-indigo-600 text-4xl  font-bold">Lorem</span>
+                        <span className="text-indigo-600 text-4xl  logo">Amar Dokan</span>
 
                         <SearchBar />
                         <div className="flex items-center space-x-8">
@@ -63,12 +63,12 @@ const Navbar = () => {
                 >
                     {showStickyNav && (
                         <Container className="flex justify-between items-center h-20">
-                            <span className="text-indigo-600 text-4xl ">Lorem</span>
+                            <span className="text-indigo-600 text-4xl logo">Amar Dokan</span>
                             <nav className="space-x-4">
                                 {navLinks.map(item => {
                                     const isActive = pathName === item.href || pathName.startsWith(item.href) && item.href !== '/'
                                     return <Link key={item.name} href={item.href} className={`text-gray-700  pb-1 text-xl dark:text-gray-300 hover:text-blue-700 ${isActive && 'border-b-2 border-gray-600'}`}>
-                                        {item.name}
+                                        <span className="uppercase nav"> {item.name}</span>
                                     </Link>
                                 })}
                             </nav>
@@ -85,7 +85,7 @@ const Navbar = () => {
                 <aside className="   w-full bg-background shadow-md z-50">
                     <div className="flex fixed top-0 w-full bg-white dark:bg-gray-900 left-0 justify-between items-center p-4 z-[999]">
                         {/* Logo */}
-                        <span className="text-primary text-xl font-bold">Lorem</span>
+                        <span className="text-primary text-xl logo">Amar Dokan</span>
 
                         <span className="flex justify-center items-center gap-6">
                             <CartDrawer />

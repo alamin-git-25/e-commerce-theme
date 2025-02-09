@@ -172,3 +172,13 @@ text.title {
   font-family: "Smooch Sans", serif;
   letter-spacing: 2px;
 }
+.logo {
+  font-family: "Smooch Sans", serif;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+.nav {
+  font-family: "Smooch Sans", serif;
+  letter-spacing: 2px;
+  font-weight: 700;
+}

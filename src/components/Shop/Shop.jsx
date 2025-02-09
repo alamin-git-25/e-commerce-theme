@@ -1,5 +1,5 @@
 "use client"
-import React, { useMemo, useState } from 'react'
+import React, { Suspense, useMemo, useState } from 'react'
 import Container from '../custom/Container'
 import ShopCategory from './shop-utils/ShopCategory'
 import BrandsFilter from './shop-utils/Brands'
@@ -10,9 +10,7 @@ import PageBanner from '../custom/PageBanner'
 import MoabilFilter from './shop-utils/MoabilFilter'
 import SearchBar from './shop-utils/Searchbar'
 import { useGetAllProductsQuery, useGetEveryProductsQuery } from '@/redux/api/productApi'
-
-
-
+import LoadingSpinner from '../hooks/Spinner'
 
 
 export default function Shop() {
@@ -65,12 +63,14 @@ export default function Shop() {
                                 <SlidersHorizontal className="w-5 h-5" />
                             </button>
                         </div>
-                        <Products
-                            products={products}
-                            isLoading={isLoading}
-                            isFetching={isFetching}
-                            isGridView={isGridView}
-                            setIsGridView={setIsGridView} />
+                        <Suspense fallback={<p>loading...</p>}>
+                            <Products
+                                products={products}
+                                isLoading={isLoading}
+                                isFetching={isFetching}
+                                isGridView={isGridView}
+                                setIsGridView={setIsGridView} />
+                        </Suspense>
                     </div>
                 </div>
             </Container>

@@ -20,9 +20,6 @@ export default function Products({ isGridView, products, isLoading }) {
     const searchParams = useSearchParams();
     const page = Number(searchParams.get('page')) || num;
     const per_page = Number(searchParams.get('per_page')) || 12;
-
-
-
     const start = (page - 1) * per_page;
     const end = start + per_page;
     const alls = Array.isArray(products) ? products.slice(start, end) : [];

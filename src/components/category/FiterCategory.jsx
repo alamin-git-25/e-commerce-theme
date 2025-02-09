@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import PageBanner from "../custom/PageBanner";
 import Container from "../custom/Container";
 import SearchBar from "../Shop/shop-utils/Searchbar";
@@ -28,7 +28,7 @@ export default function Category({ category }) {
 
 
     const products = useMemo(() => data?.filter((item) => item?.subCategory === category) || [], [data]);
-    console.log(products);
+
 
     return (
         <section>
@@ -68,12 +68,14 @@ export default function Category({ category }) {
                                 <SlidersHorizontal className="w-5 h-5" />
                             </button>
                         </div>
-                        <Products
-                            products={products}
-                            isLoading={isLoading}
-                            isFetching={isFetching}
-                            isGridView={isGridView}
-                            setIsGridView={setIsGridView} />
+                        <Suspense fallback={<p>loading..</p>}>
+                            <Products
+                                products={products}
+                                isLoading={isLoading}
+                                isFetching={isFetching}
+                                isGridView={isGridView}
+                                setIsGridView={setIsGridView} />
+                        </Suspense>
                     </div>
                 </div>
             </Container>

@@ -43,7 +43,7 @@ const Navbar = () => {
                 <Container>
                     <nav className="flex justify-between items-center h-20">
                         {/* Logo */}
-                        <span className="text-indigo-600 text-4xl  logo">Amar Dokan</span>
+                        <span className="text-button text-4xl  logo">Amar Dokan</span>
 
                         <SearchBar />
                         <div className="flex items-center space-x-8">
@@ -63,7 +63,7 @@ const Navbar = () => {
                 >
                     {showStickyNav && (
                         <Container className="flex justify-between items-center h-20">
-                            <span className="text-indigo-600 text-4xl logo">Amar Dokan</span>
+                            <span className="text-button text-4xl logo">Amar Dokan</span>
                             <nav className="space-x-4">
                                 {navLinks.map(item => {
                                     const isActive = pathName === item.href || pathName.startsWith(item.href) && item.href !== '/'
@@ -85,7 +85,7 @@ const Navbar = () => {
                 <aside className="   w-full bg-background shadow-md z-50">
                     <div className="flex fixed top-0 w-full bg-white dark:bg-gray-900 left-0 justify-between items-center p-4 z-[999]">
                         {/* Logo */}
-                        <span className="text-primary text-xl logo">Amar Dokan</span>
+                        <span className="text-button text-xl logo">Amar Dokan</span>
 
                         <span className="flex justify-center items-center gap-6">
                             <CartDrawer />
@@ -147,6 +147,7 @@ const Navbar = () => {
                                             </motion.span>
                                         ))}
                                     </nav>
+
                                 </motion.div>
                             </>
                         )}

@@ -5,12 +5,29 @@ const Pagination = ({ page, setPage, totalPages, per_page }) => {
     for (let i = 1; i <= Math.ceil(totalPages / per_page); i++) {
         pageNumbers.push(i);
     }
-
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+    const prev = () => {
+        page !== 1 && setPage(page - 1);
+        scrollToTop()
+    }
+    const num = (num) => {
+        setPage(num);
+        scrollToTop()
+    }
+    const next = () => {
+        page !== pageNumbers.length && setPage(page + 1)
+        scrollToTop()
+    }
     return (
         <div className="flex items-center justify-center mt-6 space-x-2">
             {/* Previous Button */}
             <button
-                onClick={() => page !== 1 && setPage(page - 1)}
+                onClick={prev}
                 disabled={page === 1}
                 className={`px-3 py-1 border rounded ${page === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
             >
@@ -18,20 +35,20 @@ const Pagination = ({ page, setPage, totalPages, per_page }) => {
             </button>
 
             {
-                pageNumbers?.map(page => (
+                pageNumbers?.map(pageNum => (
                     <button
-                        key={page}
-                        onClick={() => setPage(page)}
-                        className={`px-3 py-1 border rounded ${page === page ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'}`}
+                        key={pageNum}
+                        onClick={() => num(pageNum)}
+                        className={`px-3 py-1 border rounded ${pageNum == page ? 'bg-button text-white' : ''}`}
                     >
-                        {page}
+                        {pageNum}
                     </button>
                 ))
             }
 
             {/* Next Button */}
             <button
-                onClick={() => page !== pageNumbers.length && setPage(page + 1)}
+                onClick={next}
                 disabled={page === totalPages}
                 className={`px-3 py-1 border rounded ${page === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
             >

@@ -23,7 +23,7 @@ export function Profile() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
 
-                <CircleUser className="size-6 cursor-pointer" />
+                <CircleUser className="size-6 cursor-pointer text-button" />
 
             </DropdownMenuTrigger>
 

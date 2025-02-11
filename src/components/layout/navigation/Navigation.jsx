@@ -13,8 +13,10 @@ import Image from "next/image";
 const Navigation = () => {
     const navLinks = [
         { name: "Home", href: "/" },
+
         { name: "Shop", href: "/shop" },
-        { name: "Contact", href: "/contact" }
+        { name: "Contact", href: "/contact" },
+        { name: "Home2", href: "/home" },
     ];
     const [isOpen, setIsOpen] = useState(false);
     const [showStickyNav, setShowStickyNav] = useState(false);
@@ -76,11 +78,11 @@ const Navigation = () => {
     return (
         <header className="bg-white dark:bg-gray-800 shadow-md z-50">
             <Container className="flex items-center justify-between h-14 relative">
-                <div className="flex items-center w-[30%] justify-between">
+                <div className="flex items-center w-[30%] justify-between relative">
                     <button
                         ref={buttonRef}
                         onClick={() => setIsOpen(!isOpen)}
-                        className="flex items-center bg-blue-800 text-white justify-between w-full px-4 py-3 hover:bg-blue-900 transition"
+                        className="flex items-center bg-button rounded text-white justify-between w-full px-4 py-3 hover:bg-button-foreground transition"
                     >
                         <span className="flex">
                             <LayoutDashboard className="mr-4" />
@@ -95,12 +97,68 @@ const Navigation = () => {
                         </motion.div>
                     </button>
                 </div>
-                <nav className="ml-6 space-x-6 hidden md:flex">
+                {/* <nav className="ml-6 space-x-6 hidden md:flex">
                     {navLinks.map(item => {
                         const isActive = pathName === item.href || pathName.startsWith(item.href) && item.href !== '/'
                         return <Link key={item.name} href={item.href} className={`text-gray-700  pb-1 text-xl dark:text-gray-300 hover:text-blue-700 ${isActive && 'border-b-2  border-gray-600'}`}>
                             <span className="uppercase nav">{item.name}</span>
                         </Link>
+                    })}
+                </nav> */}
+                {/* <nav className="ml-6 space-x-6 hidden md:flex relative">
+                    {navLinks.map((item) => {
+                        const isActive =
+                            pathName === item.href || (pathName.startsWith(item.href) && item.href !== "/");
+                        return (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className="relative text-gray-700 z-10  px-4 py-2 text-xl dark:text-gray-300 hover:text-blue-700"
+                            >
+                                <span className="uppercase nav">{item.name}</span>
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="active-pill"
+                                        className="absolute left-0 right-0 h-full bg-indigo-600 bottom-0"
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 500,
+                                            damping: 30,
+                                        }}
+                                    />
+                                )}
+                            </Link>
+                        );
+                    })}
+                </nav> */}
+                <nav className="ml-6 space-x-6 hidden md:flex relative  border  rounded">
+                    {navLinks.map((item) => {
+                        const isActive =
+                            pathName === item.href || (pathName.startsWith(item.href) && item.href !== "/");
+                        return (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={`relative text-xl px-4 py-2 uppercase  transition-all ${isActive
+                                    ? "text-white"
+                                    : "text-gray-700 dark:text-gray-300 hover:text-blue-700"
+                                    }`}
+                            >
+                                <span className="relative z-10">{item.name}</span>
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="active-pill"
+                                        className="absolute inset-0 m-1 bg-button rounded"
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 500,
+                                            damping: 30,
+
+                                        }}
+                                    />
+                                )}
+                            </Link>
+                        );
                     })}
                 </nav>
                 <div className="flex items-center space-x-4">
@@ -122,7 +180,7 @@ const Navigation = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 20 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
-                            className="absolute top-0 left-0 w-[30%] overflow-hidden bg-white dark:bg-gray-700 shadow-lg border border-gray-200 dark:border-gray-600 z-50"
+                            className="absolute top-auto left-auto w-[28.5%] overflow-hidden bg-white dark:bg-gray-700 shadow-lg border border-gray-200 dark:border-gray-600 z-50"
                         >
                             <ul>
                                 {categories.map((category, index) => (
@@ -167,7 +225,7 @@ const Navigation = () => {
                                                                                 <Image src={sub?.icon} width={30} height={30} alt={sub?.name} />
                                                                                 <p>{sub?.name}</p>
                                                                             </span>
-                                                                            <MoveRight />
+
                                                                         </Link>
                                                                     </li>
                                                                 ))}

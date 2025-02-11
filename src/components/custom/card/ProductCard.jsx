@@ -45,7 +45,7 @@ export default function ProductCard({ product, handleAddToCart }) {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Button variant="primary" className="relative border py-2 px-8 bg-white text-black font-bold uppercase tracking-wider rounded">
+                                <Button variant="primary" className="relative border py-2 px-8 bg-white hover:bg-gray-200 text-black font-bold uppercase tracking-wider rounded">
                                     <Link href={`/details/${product.product_id}`}> <EyeIcon /></Link>
                                 </Button>
                             </TooltipTrigger>
@@ -58,7 +58,7 @@ export default function ProductCard({ product, handleAddToCart }) {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Button onClick={() => handleAddToCart(product)} title="Add To Cart" variant="primary" className="relative border py-2 px-8 bg-white text-black font-bold uppercase tracking-wider rounded">
+                                <Button onClick={() => handleAddToCart(product)} variant="primary" className="relative border py-2 px-8 bg-white hover:bg-gray-200 text-black font-bold uppercase tracking-wider rounded">
                                     <ShoppingCartIcon />
                                 </Button>
                             </TooltipTrigger>
@@ -68,7 +68,7 @@ export default function ProductCard({ product, handleAddToCart }) {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-                <button className='py-1 rounded my-4 text-text px-4 bg-green-400 border md:hidden'>Add To Cart</button>
+                <button className='py-1 rounded my-4 text-text px-4 bg-button hover:bg-button-foreground text-white border md:hidden'>Add To Cart</button>
             </div>
         </motion.div>
 

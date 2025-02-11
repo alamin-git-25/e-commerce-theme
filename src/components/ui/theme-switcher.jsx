@@ -20,7 +20,7 @@ export function ModeToggle() {
                 <Moon />
             ) : (
 
-                <Sun />
+                <Sun className="text-button" />
             )}
         </button>
     )

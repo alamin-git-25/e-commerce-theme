@@ -29,7 +29,7 @@ export default function Category({ toggleMenu }) {
                 <button
                     ref={buttonRef}
                     onClick={() => setIsOpen(!isOpen)}
-                    className="flex items-center bg-indigo-400 text-white justify-between w-full px-4 py-3 hover:bg-blue-800 transition"
+                    className="flex items-center bg-card text-white justify-between w-full px-4 py-3 hover:bg-blue-800 transition"
                 >
                     <span className="flex">
                         <LayoutDashboard className="mr-4" />
@@ -103,7 +103,7 @@ export default function Category({ toggleMenu }) {
 
                                                                                 <p>{sub.name}</p>
                                                                             </span>
-                                                                            <MoveRight />
+
                                                                         </Link>
                                                                     </li>
                                                                 ))}

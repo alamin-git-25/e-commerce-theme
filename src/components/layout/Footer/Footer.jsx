@@ -1,8 +1,11 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Facebook, Twitter, Youtube, Linkedin } from "lucide-react";
+import { Facebook, Twitter, Youtube, Linkedin, ArrowUpToLine, MoveUp, ArrowUp } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
     const listVariants = {
@@ -25,9 +28,31 @@ const Footer = () => {
         { href: "#youtube", icon: <Youtube className="w-5 h-5" />, label: "YouTube" },
         { href: "#linkedin", icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn" },
     ];
+    const [isVisible, setIsVisible] = useState(false);
 
+    // Function to handle scroll
+    useEffect(() => {
+        const toggleVisibility = () => {
+            if (window.scrollY > 300) {
+                setIsVisible(true);
+            } else {
+                setIsVisible(false);
+            }
+        };
+
+        window.addEventListener("scroll", toggleVisibility);
+        return () => window.removeEventListener("scroll", toggleVisibility);
+    }, []);
+
+    // Function to scroll to top
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
     return (
-        <footer className="mt-36 ">
+        <footer className="mt-36 relative">
             {/* Newsletter Section */}
             <motion.div
                 className="bg-gray-200 newsLetter py-8 dark:bg-gray-700 mt-10 text-text p-8 md:py-20 h-80 text-center relative"
@@ -52,14 +77,22 @@ const Footer = () => {
                             placeholder="Enter Your Email..."
                             className="md:flex-grow px-4 py-4 text-xl w-full text-foreground rounded bg-transparent focus:outline-none"
                         />
-                        <button className="bg-green-400 md:absolute md:w-36 w-full right-1 text-xl rounded  text-primary-foreground px-6 py-2 hover:bg-primary/90 transition">
+                        <button className="bg-button hover:bg-button-foreground md:absolute md:w-36 w-full right-1 text-xl rounded  text-primary-foreground px-6 py-2  transition">
                             Subscribe
                         </button>
                     </div>
                 </motion.div>
 
             </motion.div>
-
+            {isVisible && (
+                <button
+                    onClick={scrollToTop}
+                    className="fixed bottom-16 right-8  bg-button text-white p-3 rounded-full shadow-md hover:bg-blue-700 transition-all"
+                    aria-label="Go to top"
+                >
+                    <ArrowUp className="w-5 h-5" />
+                </button>
+            )}
             {/* Footer Links Section */}
             <motion.div
                 className="container mx-auto mt-10 px-4 py-20 grid grid-cols-1 md:grid-cols-4 gap-8"
@@ -93,7 +126,6 @@ const Footer = () => {
                         ))}
                     </div>
                 </motion.div>
-
                 {/* Footer Links */}
                 {["My Account", "Information", "Contact Us"].map((title, idx) => (
                     <motion.div key={idx} variants={itemVariants}>

@@ -32,7 +32,7 @@ export default function SearchBar() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="flex-grow px-4 py-3 text-foreground bg-transparent focus:outline-none"
                 />
-                <button className="bg-green-400 absolute right-1  text-primary-foreground px-6 py-2 hover:bg-primary/90 transition">
+                <button className="bg-button absolute right-1  text-white px-6 py-2 hover:bg-button-foreground rounded transition">
                     <Search />
                 </button>
 

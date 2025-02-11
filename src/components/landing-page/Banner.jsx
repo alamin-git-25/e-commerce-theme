@@ -91,6 +91,7 @@ const Banner = () => {
 
     return (
         <div
+
             className="relative w-full h-[100vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -125,7 +126,7 @@ const Banner = () => {
                                         },
                                     },
                                 }}
-                                className={`absolute inset-0 flex flex-col md:flex-row items-center justify-between container mx-auto bg-cover bg-no-repeat`}
+                                className={`absolute inset-0 flex flex-col md:flex-row items-center justify-between px-10 container mx-auto bg-cover bg-no-repeat`}
                             >
                                 <motion.div
                                     className="text-left text-neutral max-w-md space-y-4 px-4 sm:px-6 md:px-0"
@@ -144,7 +145,7 @@ const Banner = () => {
                                     </motion.h2>
                                     <motion.p className="text-lg sm:text-xl mb-6">{slide.offer}</motion.p>
                                     <motion.button
-                                        className="bg-neutral text-primary px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition"
+                                        className="bg-button text-white px-6 py-2 rounded-lg font-semibold hover:bg-button-foreground transition"
                                     >
                                         {slide.button}
                                     </motion.button>
@@ -219,3 +220,6 @@ const Banner = () => {
 };
 
 export default Banner;
+
+
+

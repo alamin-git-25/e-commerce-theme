@@ -15,6 +15,7 @@ import { useGetAllProductsQuery, useGetEveryProductsQuery } from "@/redux/api/pr
 export default function Category({ category }) {
     const [isGridView, setIsGridView] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     const toggleMenu = () => setIsOpen(!isOpen);
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -28,7 +29,13 @@ export default function Category({ category }) {
 
 
     const products = useMemo(() => data?.filter((item) => item?.subCategory === category) || [], [data]);
-
+    const filteredProducts = useMemo(() => {
+        if (!products) return [];
+        if (!searchTerm.trim()) return products;
+        return products?.filter(product =>
+            product?.name?.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [products, searchTerm]);
 
     return (
         <section>
@@ -41,7 +48,7 @@ export default function Category({ category }) {
             <Container className="my-5">
                 <div className='grid md:grid-cols-4 grid-cols-1 gap-4'>
                     <div className='w-full h-screen md:block hidden'>
-                        <SearchBar />
+                        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                         <ShopCategory />
                         <BrandsFilter />
                         <PriceRangeSlider />
@@ -70,7 +77,7 @@ export default function Category({ category }) {
                         </div>
                         <Suspense fallback={<p>loading..</p>}>
                             <Products
-                                products={products}
+                                products={filteredProducts}
                                 isLoading={isLoading}
                                 isFetching={isFetching}
                                 isGridView={isGridView}

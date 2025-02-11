@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { ShoppingCart, ShoppingCartIcon } from "lucide-react";
 
 export const OfferCard = ({ title, description, price, image }) => {
     return (
@@ -70,20 +71,20 @@ export const OfferCard = ({ title, description, price, image }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative bg-card w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-5 p-6 shadow-lg rounded-lg"
+            className="relative bg-card w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-5 p-6 shadow rounded-lg"
         >
             <motion.div
                 initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
-                className="md:absolute md:top-0 md:right-0 flex justify-center md:block"
+                className="md:absolute max-w-[450px] max-h-[400px] md:top-0 md:right-0 flex justify-center md:block"
             >
                 <Image
                     src={image}
                     alt={title}
                     width={200}
                     height={200}
-                    className="object-contain w-full max-w-[450px] md:max-w-full h-auto"
+                    className="object-contain w-full   h-full"
                 />
             </motion.div>
 
@@ -102,25 +103,25 @@ export const OfferCard = ({ title, description, price, image }) => {
                     EXCLUSIVE
                 </motion.span>
                 <h1 className="text-xl line-clamp-2 text-text mt-2">{title}</h1>
-                <p className="text-text text-sm mt-2 line-clamp-3">{description}</p>
+                <p className="text-text text-sm mt-2 line-clamp-2 ">{description}</p>
+                <p
 
+                    className="text-xl font-bold text-text mt-3   rounded-full transition-all duration-300  "
+                >
+                    ${price}
+                </p>
                 <motion.div
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.5, duration: 0.5 }}
                     className="flex flex-wrap justify-center md:justify-start mt-4 gap-2"
                 >
+
                     <a
                         href="#"
-                        className="text-xs font-bold text-text px-4 py-2 border border-gray-400 rounded-full transition-all duration-300 hover:bg-gray-900 hover:text-white"
+                        className="text-xs font-bold text-text px-4 py-2 border border-gray-400 rounded-full flex items-center gap-2 transition-all duration-300 hover:bg-button-foreground hover:text-white"
                     >
-                        ${price}
-                    </a>
-                    <a
-                        href="#"
-                        className="text-xs font-bold text-text px-4 py-2 border border-gray-400 rounded-full flex items-center gap-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
-                    >
-                        <i className="cart-icon ion-bag"></i> ADD TO CART
+                        <ShoppingCartIcon /> ADD TO CART
                     </a>
                 </motion.div>
             </motion.div>
@@ -203,7 +204,7 @@ export const OfferBanner = ({ title, description, price, image }) => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="relative bg-card w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-5 p-6 shadow-lg rounded-lg"
+                className="relative bg-card w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-5 p-6 shadow rounded-lg"
             >
                 <motion.div
                     initial={{ x: 50, opacity: 0 }}
@@ -238,26 +239,26 @@ export const OfferBanner = ({ title, description, price, image }) => {
                         EXCLUSIVE
                     </motion.span>
                     <h1 className="text-2xl font-bold text-text">{title}</h1>
-                    <p className="text-text text-sm line-clamp-3">{description}</p>
+                    <p className="text-text text-sm line-clamp-3 overflow-hidden">{description}</p>
+                    <p
 
+                        className="text-2xl block font-bold text-text px-4 py-2  rounded-full transition-all duration-300  "
+                    >
+                        ${price}
+                    </p>
                     <motion.div
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: 20, opacity: 0 }}
                         transition={{ delay: 0.5, duration: 0.5 }}
-                        className="flex flex-wrap justify-center md:justify-start gap-2 mt-4"
+                        className=" mt-4"
                     >
+
                         <a
                             href="#"
-                            className="text-xs font-bold text-text px-4 py-2 border border-gray-400 rounded-full transition-all duration-300 hover:bg-gray-900 hover:text-white"
+                            className="text-xs font-bold text-text px-4 py-2 border border-gray-400 rounded-full flex items-center gap-2 transition-all duration-300 hover:bg-button hover:text-white"
                         >
-                            ${price}
-                        </a>
-                        <a
-                            href="#"
-                            className="text-xs font-bold text-text px-4 py-2 border border-gray-400 rounded-full flex items-center gap-2 transition-all duration-300 hover:bg-gray-900 hover:text-white"
-                        >
-                            <i className="cart-icon ion-bag"></i> ADD TO CART
+                            <ShoppingCart /> ADD TO CART
                         </a>
                     </motion.div>
                 </motion.div>

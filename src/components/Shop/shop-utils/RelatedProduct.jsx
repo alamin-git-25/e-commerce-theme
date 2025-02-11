@@ -6,7 +6,7 @@ import Container from "@/components/custom/Container";
 import { SectionHeader } from "@/components/custom/Heading";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useGetAllProductsQuery } from "@/redux/api/productApi";
+import { useGetAllProductsQuery, useGetEveryProductsQuery } from "@/redux/api/productApi";
 import LoadingSpinner from "@/components/hooks/Spinner";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
@@ -16,11 +16,11 @@ import { toast } from "react-toastify";
 export function RelatedProducts({ category, id }) {
     console.log(category);
 
-    const { data, isLoading, isFetching } = useGetAllProductsQuery({ page: 1, limit: 12 }, {
+    const { data, isLoading, isFetching } = useGetEveryProductsQuery(undefined, {
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
     });
-    const products = data?.data?.filter((item) => item?.subCategory === category && item.product_id !== id);
+    const products = data?.filter((item) => item?.subCategory === category && item.product_id !== id);
 
     // Always call hooks at the top level
     const [index, setIndex] = useState(0);
@@ -71,33 +71,72 @@ export function RelatedProducts({ category, id }) {
                         dragConstraints={{ left: -500, right: 0 }}
                         whileTap={{ cursor: "grabbing" }}
                     >
-                        {products && products.map((product, idx) => (
+                        {products && products?.map((product, idx) => (
+                            // <motion.div
+                            //     key={product.id || idx}
+                            //     className="z-20 flex flex-col md:w-full w-80 md:h-auto h-20 bg-card shadow-md rounded-lg p-4 md:min-w-80 min-w-20"
+                            // >
+                            //     <Image
+                            //         src={product?.images[0] || '/p.jpg'}
+                            //         width={300}
+                            //         height={300}
+                            //         priority
+                            //         alt="Product image"
+                            //         className="text-4xl mb-2 z-10"
+                            //     />
+                            //     <div className="text-yellow-500">
+                            //         {Array.from({ length: maxStars }, (_, idx) => (
+                            //             <span key={idx}>
+                            //                 {idx < Math.floor(product.rating) ? '★' : '☆'}
+                            //             </span>
+                            //         ))}
+                            //     </div>
+                            //     <h3 className="text-xl font-semibold md:block hidden line-clamp-3">{product?.name}</h3>
+                            //     <h3 className="text-sm font-semibold md:block hidden">${product?.price}</h3>
+                            //     <div className="flex justify-between w-full gap-2 mt-2">
+                            //         <Button className="w-full"><Link href={`/details/${product?.product_id}`}>View Details</Link></Button>
+                            //         <Button onClick={() => handleAddToCart(product)} variant="secondary" className="w-full ">Add To Cart</Button>
+                            //     </div>
+                            // </motion.div>
                             <motion.div
                                 key={product.id || idx}
-                                className="z-20 flex flex-col md:w-full w-80 md:h-full h-20 bg-card shadow-md rounded-lg p-4 md:min-w-80 min-w-20"
+                                className="z-20 flex flex-col justify-between md:w-full w-80 bg-card shadow-md rounded-lg p-4 md:min-w-80 min-w-20 h-full"
                             >
-                                <Image
-                                    src={product.images[0] || '/p.jpg'}
-                                    width={300}
-                                    height={300}
-                                    priority
-                                    alt="Product image"
-                                    className="text-4xl mb-2 z-10"
-                                />
-                                <div className="text-yellow-500">
-                                    {Array.from({ length: maxStars }, (_, idx) => (
-                                        <span key={idx}>
-                                            {idx < Math.floor(product.rating) ? '★' : '☆'}
-                                        </span>
-                                    ))}
+                                <div>
+                                    <Image
+                                        src={product?.images[0] || '/p.jpg'}
+                                        width={300}
+                                        height={300}
+                                        priority
+                                        alt="Product image"
+                                        className="text-4xl mb-2 z-10"
+                                    />
+                                    <div className="text-yellow-500">
+                                        {Array.from({ length: maxStars }, (_, idx) => (
+                                            <span key={idx}>
+                                                {idx < Math.floor(product.rating) ? '★' : '☆'}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <div className="line-clamp-1 overflow-hidden">
+                                        <h3 className="text-xl font-semibold md:block hidden">
+                                            {product?.name}
+                                        </h3>
+                                    </div>
+                                    <h3 className="text-sm font-semibold md:block hidden">${product?.price}</h3>
                                 </div>
-                                <h3 className="text-xl font-semibold md:block hidden">{product.name}</h3>
-                                <h3 className="text-sm font-semibold md:block hidden">${product.price}</h3>
-                                <div className="flex justify-between w-full gap-2 mt-2">
-                                    <Button className="w-full"><Link href={`/details/${product.product_id}`}>View Details</Link></Button>
-                                    <Button onClick={() => handleAddToCart(product)} variant="secondary" className="w-full ">Add To Cart</Button>
+
+                                {/* Button container fixed at bottom */}
+                                <div className="flex justify-between w-full gap-2 mt-4">
+                                    <Button className="w-full">
+                                        <Link href={`/details/${product?.product_id}`}>View Details</Link>
+                                    </Button>
+                                    <Button onClick={() => handleAddToCart(product)} variant="secondary" className="w-full">
+                                        Add To Cart
+                                    </Button>
                                 </div>
                             </motion.div>
+
                         ))}
                     </motion.div>
                 </div>

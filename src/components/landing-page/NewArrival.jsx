@@ -86,8 +86,8 @@ export function NewArrival() {
                                 <h3 className="text-xl font-semibold line-clamp-2  md:block hidden">{product.name}</h3>
                                 <h3 className="text-sm font-semibold  md:block hidden">${product.price}</h3>
                                 <div className="flex justify-between absolute bottom-0 left-0 p-2 items-end w-full gap-2 mt-2">
-                                    <Button className="w-full "><Link href={`/details/${product.product_id}`}>View Details</Link></Button>
-                                    <Button onClick={() => handleAddToCart(product)} variant="secondary" className="w-full ">Add To Cart</Button>
+                                    <button className="w-full border text-text px-4 py-2 rounded hover:bg-button hover:text-white"><Link href={`/details/${product.product_id}`}>View Details</Link></button>
+                                    <button onClick={() => handleAddToCart(product)} variant="secondary" className="w-full px-4 py-2 rounded text-white bg-button hover:bg-button-foreground">Add To Cart</button>
                                 </div>
                             </motion.div>
 

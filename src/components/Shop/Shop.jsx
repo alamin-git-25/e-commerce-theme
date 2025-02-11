@@ -15,6 +15,7 @@ import LoadingSpinner from '../hooks/Spinner'
 
 export default function Shop() {
     const [isGridView, setIsGridView] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen(!isOpen);
     const breadcrumbs = [
@@ -25,6 +26,13 @@ export default function Shop() {
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
     })
+    const filteredProducts = useMemo(() => {
+        if (!products) return [];
+        if (!searchTerm.trim()) return products;
+        return products?.filter(product =>
+            product?.name?.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [products, searchTerm]);
     return (
         <section>
             <PageBanner
@@ -36,7 +44,7 @@ export default function Shop() {
             <Container className="my-5">
                 <div className='grid md:grid-cols-4 grid-cols-1 gap-4'>
                     <div className='w-full h-screen md:block hidden'>
-                        <SearchBar />
+                        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                         <ShopCategory />
                         <BrandsFilter />
                         <PriceRangeFilter />
@@ -44,20 +52,20 @@ export default function Shop() {
                     <div className='w-full h-screen col-span-3'>
                         <div className="flex h-12 justify-start items-center mb-4 space-x-2 md:ml-0 ml-3">
                             <button
-                                className={`p-2 rounded transition-colors duration-300 ${isGridView ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                                className={`p-2 rounded transition-colors duration-300 ${isGridView ? "bg-button text-white" : "bg-gray-200"}`}
                                 onClick={() => setIsGridView(true)}
                             >
                                 <LayoutGrid className="w-5 h-5" />
                             </button>
                             <button
-                                className={`p-2 rounded transition-colors duration-300 ${!isGridView ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                                className={`p-2 rounded transition-colors duration-300 ${!isGridView ? "bg-button text-white" : "bg-gray-200"}`}
                                 onClick={() => setIsGridView(false)}
                             >
                                 <List className="w-5 h-5" />
                             </button>
                             <button
                                 onClick={toggleMenu}
-                                className="p-2 rounded md:hidden block   bg-gray-800 text-neutral-50"
+                                className="p-2 rounded md:hidden block   bg-button-foreground text-neutral-50"
 
                             >
                                 <SlidersHorizontal className="w-5 h-5" />
@@ -65,7 +73,7 @@ export default function Shop() {
                         </div>
                         <Suspense fallback={<p>loading...</p>}>
                             <Products
-                                products={products}
+                                products={filteredProducts}
                                 isLoading={isLoading}
                                 isFetching={isFetching}
                                 isGridView={isGridView}

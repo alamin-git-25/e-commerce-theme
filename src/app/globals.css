@@ -1,9 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Smooch+Sans:wght@100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 html {
   scroll-behavior: smooth;
+  /* font-family: "Smooch Sans", serif; */
+  font-family: "Roboto", serif;
+  /* font-size: 20px; */
 }
 
 @layer base {
@@ -27,7 +30,9 @@ html {
     /* Accent Colors */
     --accent: 215 27.9% 16.9%; /* Gold (#FFD700) */
     --accent-foreground: 0 0% 10%; /* Black */
-
+    --button: #37b77c;
+    --button-foreground: #36ab75;
+    --button_text: 151.8 81% 95.9%;
     /* Muted (Neutrals) */
     --muted: 220 16% 85%; /* Light Gray (#E5E7EB) */
     --muted-foreground: 220 10% 50%; /* Gray Text (#6B7280) */
@@ -61,7 +66,8 @@ html {
 
     --accent: 215.4 16.3% 46.9%; /* Bright Gold (#FFD700) */
     --accent-foreground: 0 0% 10%;
-
+    --button: 242 82% 65%;
+    --button-foreground: 0 0% 100%;
     --muted: 220 20% 15%;
     --muted-foreground: 220 10% 70%;
 
@@ -181,4 +187,11 @@ text.title {
   font-family: "Smooch Sans", serif;
   letter-spacing: 2px;
   font-weight: 700;
+}
+.nav-shadow {
+  box-shadow: rgb(204, 219, 232) 3px 3px 2px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 2px 1px inset;
+}
+.iiz__btn iiz__hint {
+  display: none;
 }

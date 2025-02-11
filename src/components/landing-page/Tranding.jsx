@@ -77,7 +77,7 @@ export default function Tranding() {
                 </AnimatePresence>
             </motion.section>
 
-            <Offer />
+
         </Container>
     );
 }

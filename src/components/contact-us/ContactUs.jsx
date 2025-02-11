@@ -65,14 +65,14 @@ export default function Contact() {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 my-5 bg-card p-4 rounded-lg shadow-md">
 
                 {/* Image Section - 4 Columns */}
-                <div className="md:col-span-2 bg-gray-200 dark:bg-gray-600 text-text p-8 flex flex-col justify-center items-center rounded-lg">
+                <div className="md:col-span-8 bg-gray-200 dark:bg-gray-600 text-text p-8 flex flex-col justify-center items-center rounded-lg">
                     <h2 className="text-3xl font-bold mb-4 text-center">Get in Touch</h2>
                     <p className="mb-6 text-center">We'd love to hear from you! Fill out the form or contact us directly.</p>
                     <Image src="/icons/emailIcon.png" width={300} height={300} alt="email" className="rounded-lg" />
                 </div>
 
                 {/* Contact Form Section - 8 Columns */}
-                <div className="md:col-span-10 p-4">
+                <div className="md:col-span-4 p-4">
                     <h2 className="text-3xl font-bold text-text mb-6">Contact Us</h2>
 
                     <form className="space-y-4">
@@ -103,7 +103,7 @@ export default function Contact() {
                             ></textarea>
                         </div>
 
-                        <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                        <button type="submit" className="w-full bg-button text-white py-3 rounded-lg hover:bg-button-foreground transition duration-300">
                             Send Message
                         </button>
                     </form>

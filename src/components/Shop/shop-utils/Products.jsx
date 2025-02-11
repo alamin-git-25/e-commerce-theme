@@ -19,7 +19,7 @@ export default function Products({ isGridView, products, isLoading }) {
     const [num, setNum] = useState(1);
     const searchParams = useSearchParams();
     const page = Number(searchParams.get('page')) || num;
-    const per_page = Number(searchParams.get('per_page')) || 12;
+    const per_page = Number(searchParams.get('per_page')) || 15;
     const start = (page - 1) * per_page;
     const end = start + per_page;
     const alls = Array.isArray(products) ? products.slice(start, end) : [];
@@ -58,7 +58,7 @@ export default function Products({ isGridView, products, isLoading }) {
     };
 
     return (
-        <Container className="mt-5 pb-10 overflow-hidden">
+        <section className="mt-5 pb-10 overflow-hidden">
             {/* Loading Spinner */}
             {isLoading && <LoadingSpinner />}
 
@@ -138,13 +138,16 @@ export default function Products({ isGridView, products, isLoading }) {
 
                                     {/* Fixed Bottom Buttons */}
                                     <div className={`${isGridView && 'absolute bottom-0 left-0 right-0 border-t'}  bg-white p-2 flex justify-between gap-2 `}>
-                                        <button className="px-2 py-2 border w-full bg-gray-400 rounded text-white text-nowrap">
-                                            <Link href={`/details/${product.product_id}`}>
+                                        <button className="px-2 py-2 border w-full  rounded hover:bg-button-foreground transition-colors duration-200 hover:text-white text-nowrap">
+                                            <Link href={`/details/${product.product_id}`} onClick={() => window.scrollTo({
+                                                top: 0,
+                                                behavior: "smooth",
+                                            })}>
                                                 View Product
                                             </Link>
                                         </button>
                                         <button
-                                            className="px-2 py-2 border w-full bg-gray-700 rounded text-white text-nowrap"
+                                            className="px-2 py-2 border w-full bg-button rounded text-white text-nowrap"
                                             onClick={() => handleAddToCart(product)}
                                         >
                                             Add To Cart
@@ -167,6 +170,6 @@ export default function Products({ isGridView, products, isLoading }) {
                 <NotFound />
             )
             }
-        </Container >
+        </section >
     );
 }

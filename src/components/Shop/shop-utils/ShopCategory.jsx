@@ -72,7 +72,7 @@ export default function ShopCategory() {
                                                                     <Image src={sub?.icon} width={30} height={30} alt={sub?.name} />
                                                                     <p>{sub?.name}</p>
                                                                 </span>
-                                                                <MoveRight />
+
                                                             </Link>
                                                         </li>
                                                     ))}

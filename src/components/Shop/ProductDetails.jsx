@@ -13,7 +13,8 @@ import LoadingSpinner from "../hooks/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
 import { toast } from "react-toastify";
-
+import InnerImageZoom from "react-inner-image-zoom";
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 export default function ProductDetails() {
     const params = useParams();
     const { data, isLoading, isFetching } = useGetProductQuery(params?.id, {
@@ -79,15 +80,23 @@ export default function ProductDetails() {
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                     >
-                        <Image
+                        {/* <Image
                             width={1920}
                             height={1080}
                             src={selectedImage || '/p.jpg'}
                             alt={product?.name}
                             priority
                             className="w-full h-full overflow-hidden md:h-full object-contain p-4"
+                        /> */}
+                        <InnerImageZoom
+                            src={selectedImage || '/p.jpg'}
+                            zoomSrc={selectedImage || '/p.jpg'}
+                            zoomScale={1.5}
+                            zoomType="hover"
+
                         />
                     </motion.div>
+
                 </div>
 
                 {/* Mobile Thumbnails */}
@@ -178,7 +187,7 @@ export default function ProductDetails() {
 
             {/* Related Products and Reviews */}
             <div className="mt-10">
-                <RelatedProducts category={product?.subCategory} id={product.product_id} />
+                <RelatedProducts category={product?.subCategory} id={product?.product_id} />
                 <ReviewForm />
             </div>
         </Container>

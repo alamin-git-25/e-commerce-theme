@@ -13,10 +13,8 @@ import Image from "next/image";
 const Navigation = () => {
     const navLinks = [
         { name: "Home", href: "/" },
-
         { name: "Shop", href: "/shop" },
         { name: "Contact", href: "/contact" },
-        { name: "Home2", href: "/home" },
     ];
     const [isOpen, setIsOpen] = useState(false);
     const [showStickyNav, setShowStickyNav] = useState(false);

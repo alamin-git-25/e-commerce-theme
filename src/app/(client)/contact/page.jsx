@@ -1,4 +1,4 @@
-import Contact from '@/components/contact-us/ContactUs'
+import Contact from '@/components/layout/home1/pages/contact-us/ContactUs'
 import React from 'react'
 
 export default function page() {

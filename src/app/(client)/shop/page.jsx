@@ -1,5 +1,6 @@
-import LoadingSpinner from '@/components/hooks/Spinner'
-import Shop from '@/components/Shop/Shop'
+import Shop from '@/components/layout/home1/pages/Shop/Shop'
+import LoadingSpinner from '@/components/ui/Spinner'
+
 
 import React, { Suspense } from 'react'
 

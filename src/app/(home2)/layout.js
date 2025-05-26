@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeProvider } from '@/components/ui/theme-provider'
 import '../globals.css'
 import Nav from '@/components/layout/home2/navigation/Nav'
 export const metadata = {

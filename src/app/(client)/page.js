@@ -1,15 +1,16 @@
-import Loader from "@/components/hooks/LoadingAnimation";
-import Ads from "@/components/landing-page/Ads";
-import Banner from "@/components/landing-page/Banner";
-import { Category } from "@/components/landing-page/Category";
-import { NewArrival } from "@/components/landing-page/NewArrival";
-import Offer from "@/components/landing-page/Offer";
+import Loader from "@/components/ui/LoadingAnimation";
+import Ads from "@/components/layout/home1/pages/landing-page/Ads";
+import Banner from "@/components/layout/home1/pages/landing-page/Banner";
+import { Category } from "@/components/layout/home1/pages/landing-page/Category";
+import FlashSaleCountdown from "@/components/layout/home1/pages/landing-page/FlashSale";
+import { NewArrival } from "@/components/layout/home1/pages/landing-page/NewArrival";
+import Offer from "@/components/layout/home1/pages/landing-page/Offer";
 
 
 
-import Service from "@/components/landing-page/Service";
-import Testimonial from "@/components/landing-page/Testimonial/Testimonial";
-import Tranding from "@/components/landing-page/Tranding";
+import Service from "@/components/layout/home1/pages/landing-page/Service";
+import Testimonial from "@/components/layout/home1/pages/landing-page/Testimonial/Testimonial";
+import Tranding from "@/components/layout/home1/pages/landing-page/Tranding";
 import Footer from "@/components/layout/Footer/Footer";
 
 

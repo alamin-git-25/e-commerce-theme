@@ -30,7 +30,7 @@ html {
     /* Accent Colors */
     --accent: 215 27.9% 16.9%; /* Gold (#FFD700) */
     --accent-foreground: 0 0% 10%; /* Black */
-    --button: #37b77c;
+    --button: #f9aa33;
     --button-foreground: #36ab75;
     --button_text: 151.8 81% 95.9%;
     /* Muted (Neutrals) */
@@ -66,8 +66,8 @@ html {
 
     --accent: 215.4 16.3% 46.9%; /* Bright Gold (#FFD700) */
     --accent-foreground: 0 0% 10%;
-    --button: 242 82% 65%;
-    --button-foreground: 0 0% 100%;
+    --button: #344955;
+    --button-foreground: #4a6572;
     --muted: 220 20% 15%;
     --muted-foreground: 220 10% 70%;
 

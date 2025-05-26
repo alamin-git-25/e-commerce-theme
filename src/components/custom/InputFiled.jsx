@@ -11,7 +11,7 @@ export function InputField({ id, label, value, placeholder, onChange }) {
                 value={value}
                 placeholder={placeholder}
                 onChange={onChange}
-                className="mt-1 p-3 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 h-10 px-3 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
         </div>
     );

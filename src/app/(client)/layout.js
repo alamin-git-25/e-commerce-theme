@@ -1,9 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Navbar from "@/components/layout/navigation/Navbar";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import ReduxProvider from "@/redux/Provider";
-import ToastProvider from "@/components/hooks/ToastProvider";
+import ToastProvider from "@/components/ui/ToastProvider";
 
 
 

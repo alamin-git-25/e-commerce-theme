@@ -1,5 +1,5 @@
-import Category from '@/components/category/FiterCategory';
-import LoadingSpinner from '@/components/hooks/Spinner';
+import Category from '@/components/layout/home1/pages/category/FiterCategory';
+import LoadingSpinner from '@/components/ui/Spinner';
 import React, { Suspense } from 'react'
 
 export default function page({ params }) {

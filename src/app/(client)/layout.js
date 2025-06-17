@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "E-commerce Theme",
-  description: "Made By DTT",
+  description: "Made By alamin",
 };
 
 export default function RootLayout({ children }) {
